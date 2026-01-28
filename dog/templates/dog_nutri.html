@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>canine care</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'index/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/magnific-popup.cs' %}">
+    <link rel="stylesheet" href="{% static 'index/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/style.css' %}">
+
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+      }
+      p {
+        color: black; /* Set paragraph text color to black */
+      }
+      h4, h5, h6 {
+        color: #000; /* Dark black for headings */
+      }
+      .step {
+        color: black; /* Set step text color to black */
+      }
+      .foods-to-avoid {
+                display: grid;
+                grid-template-columns: repeat(4, 1fr); /* 4 columns */
+                gap: 20px; /* Space between items */
+                margin-top: 20px;
+            }
+
+            .food-item {
+                text-align: center; /* Center text and images */
+            }
+
+            .food-item p {
+                font-weight: bold;
+                color: #000; /* Adjust color as needed */
+                margin-bottom: 5px;
+            }
+
+            .food-item img {
+                width: 100%; /* Make sure images take the full width of the container */
+                height: 150px; /* Set a fixed height for all images */
+                object-fit: cover; /* Maintain aspect ratio and cover the box */
+            }
+        .supplements {
+                margin-top: 20px;
+            }
+
+            .supplement-item {
+                display: flex;
+                align-items: center;
+                margin-bottom: 20px; /* Space between items */
+            }
+
+            .supplement-image {
+                width: 150px; /* Set a fixed width for images */
+                height: auto; /* Maintain aspect ratio */
+            }
+
+            .supplement-description {
+                margin-left: 20px; /* Space between image and text for left-aligned images */
+                margin-right: 20px; /* Space between image and text for right-aligned images */
+            }
+
+            .supplement-item.right {
+                flex-direction: row-reverse; /* Reverse the order for right-aligned images */
+            }
+
+            .supplement-item.right .supplement-description {
+                margin-left: 20px; /* Space for right-aligned description */
+                margin-right: 0; /* No right margin for right-aligned description */
+            }
+            .small-image {
+                width: 250px; /* Set a fixed width for the image */
+                height: auto; /* Maintain aspect ratio */
+            }
+                    .special-dietary-needs {
+                display: flex;
+                align-items: flex-start; /* Align items at the start */
+                margin-top: 20px; /* Space above the section */
+            }
+
+            .small-image {
+                width: 250px; /* Set a fixed width for the image */
+                height: auto; /* Maintain aspect ratio */
+                margin-right: 20px; /* Space between image and text */
+            }
+
+            .dietary-descriptions {
+                flex: 1; /* Allow the description section to take the remaining space */
+            }
+
+            .dietary-item {
+                margin-bottom: 15px; /* Space between dietary items */
+            }
+
+            .dietary-item h5 {
+                margin: 0; /* Remove default margin */
+                font-weight: bold; /* Make headings bold */
+            }
+                    .nutritional-needs {
+                display: flex;
+                align-items: flex-start; /* Align items at the start */
+            }
+
+            .right-image {
+                width: 250px; /* Set a fixed width for the image */
+                height: auto; /* Maintain aspect ratio */
+                margin-left: 20px; /* Space between text and image */
+            }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-center">
+            <p class="mb-0 phone pl-md-2">
+              <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +00 1234 567</a>
+              <a href="#"><span class="fa fa-paper-plane mr-1"></span> youremail@email.com</a>
+            </p>
+          </div>
+          <div class="col-md-6 d-flex justify-content-md-end">
+            <div class="social-media">
+              <p class="mb-0 d-flex">
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	    	<a class="navbar-brand" href="{% url 'homepage' %}"><span class="flaticon-pawprint-1 mr-2"></span>CANINE CARE</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="fa fa-bars"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	        	<li class="nav-item "><a href="{% url 'homepage' %}" class="nav-link">Home</a></li>
+	        	<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	        	<li class="nav-item"><a href="{% url 'initial_select' %}" class="nav-link">Breeds</a></li>
+
+	          <li class="nav-item"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
+	          <li class="nav-item"><a href="{% url 'chatbot' %}" class="nav-link">Ask</a></li>
+
+
+	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'index/images/try.avif' %}');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+          <div class="col-md-9 ftco-animate pb-5">
+            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html"></a></span> </p>
+            <h1 class="mb-0 bread">🐾 Woof-tastic Nutrition for a Happy, Healthy Pup! 🐶🥗"</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 ftco-animate">
+            <p>
+                <img src="{% static 'index/images/n1.jpeg' %}" alt="" class="img-fluid" width="500" height="100">
+            </p>
+
+            <p>Proper nutrition is essential for your dog's overall health, well-being, and longevity. Understanding what to feed your furry friend can help you make informed choices that support their unique needs.</p>
+
+
+            <h4>Understanding Dog Nutritional Needs</h4>
+                <div class="nutritional-needs">
+                    <p>Dogs require a balanced diet that includes several essential components to ensure their overall health and well-being. Proteins are the building blocks of your dog’s body, crucial for growth, maintenance, and repair of tissues. High-quality protein sources include meat (such as chicken, beef, lamb, and turkey), fish (like salmon and sardines, which also provide omega-3 fatty acids beneficial for skin and coat health), eggs (a complete protein source that is easily digestible and packed with essential amino acids), and legumes (such as beans and lentils, which can provide protein, especially in vegetarian diets).</p>
+                    <img src="{% static 'index/images/bowl.jpeg' %}" alt="" class="img-fluid right-image">
+                </div>
+
+
+            <h4>Types of Dog Food</h4>
+            <p>Explore the different types of dog food available to meet your pet's needs:</p>
+
+               <p> Dry Kibble: Convenient and cost-effective, dry kibble is a popular choice. Look for high-quality brands with meat as the first ingredient and minimal fillers. Kibble can also help maintain dental health by reducing plaque buildup.</p>
+
+                <p> Wet Food: Canned food can be more palatable and hydrating, making it a great option for picky eaters or dogs that need extra moisture in their diet. It often contains higher protein levels but can be more expensive.</p>
+
+               <p> Raw Diet: Some owners choose to feed their dogs a raw diet, consisting of raw meat, bones, fruits, and vegetables. This requires careful planning to ensure nutritional balance and safety. Consult with a veterinarian to create a balanced raw diet that meets your dog's needs.</p>
+
+               <p> Homemade Diets: Cooking for your dog can be rewarding, but it’s crucial to consult with a veterinarian or pet nutritionist to ensure all nutritional needs are met. Homemade diets should include a variety of proteins, carbohydrates, and vegetables to provide balanced nutrition.</p>
+
+           <h4>Special Dietary Needs</h4>
+                <p>Learn about the specific dietary requirements for different life stages and conditions:</p>
+
+                <div class="special-dietary-needs">
+                    <img src="{% static 'index/images/fd.jpeg' %}" alt="" class="img-fluid small-image">
+                    <div class="dietary-descriptions">
+                        <div class="dietary-item">
+                            <h5>Puppies</h5>
+                            <p>Require a diet rich in protein and calories to support rapid growth and development. Puppy food is specially formulated to meet these needs.</p>
+                        </div>
+                        <div class="dietary-item">
+                            <h5>Adult Dogs</h5>
+                            <p>Need a balanced diet to maintain health and energy levels. Adult dog food is designed to provide the right balance of nutrients without excess calories.</p>
+                        </div>
+                        <div class="dietary-item">
+                            <h5>Senior Dogs</h5>
+                            <p>May benefit from lower-calorie diets with joint support supplements. Senior dog food often contains added glucosamine and chondroitin for joint health.</p>
+                        </div>
+                        <div class="dietary-item">
+                            <h5>Allergies and Sensitivities</h5>
+                            <p>Some dogs may have food allergies or intolerances. Common allergens include beef, chicken, dairy, and grains. If you suspect allergies, consult your vet for an elimination diet to identify the culprit.</p>
+                        </div>
+                    </div>
+                </div>
+
+            <h4>Feeding Guidelines</h4>
+            <p> Portion Control: Follow feeding guidelines on the dog food packaging, adjusting based on your dog's activity level, age, and weight. Overfeeding can lead to obesity, while underfeeding can result in malnutrition.</p>
+
+              <p>  Regular Feeding Schedule: Establish a routine by feeding your dog at the same times each day. Most adult dogs do well with two meals a day, while puppies may require three to four smaller meals.</p>
+
+              <p>  Fresh Water: Always provide access to clean, fresh water. Hydration is crucial for your dog’s health, especially if they are on a dry kibble diet.</p>
+
+            <h4>Foods to Avoid</h4>
+                <p>Certain foods can be toxic or harmful to dogs, including:</p>
+
+                <div class="foods-to-avoid">
+                    <div class="food-item">
+                        <p>Chocolate</p>
+                        <img src="{% static 'index/images/choclate.jpeg' %}" alt="Chocolate" class="img-fluid">
+                    </div>
+                    <div class="food-item">
+                        <p>Grapes and raisins</p>
+                        <img src="{% static 'index/images/grape.jpeg' %}" alt="Grapes and raisins" class="img-fluid">
+                    </div>
+                    <div class="food-item">
+                        <p>Onions and garlic</p>
+                        <img src="{% static 'index/images/onion.jpeg' %}" alt="Onions and garlic" class="img-fluid">
+                    </div>
+                    <div class="food-item">
+                        <p>Avocado</p>
+                        <img src="{% static 'index/images/avocado.jpeg' %}" alt="Avocado" class="img-fluid">
+                    </div>
+                    <div class="food-item">
+                        <p>Alcohol</p>
+                        <img src="{% static 'index/images/alcohol.jpeg' %}" alt="Alcohol" class="img-fluid">
+                    </div>
+                    <div class="food-item">
+                        <p>Caffeine</p>
+                        <img src="{% static 'index/images/coffee.jpeg' %}" alt="Caffeine" class="img-fluid">
+                    </div>
+                    <div class="food-item">
+                        <p>Xylitol </p>
+                        <img src="{% static 'index/images/xyli.jpeg' %}" alt="Xylitol" class="img-fluid">
+                    </div>
+                    <div class="food-item">
+                          <p>Cherries</p>
+                          <img src="{% static 'index/images/cherries.jpeg' %}" alt="Cherries" class="img-fluid">
+                      </div>
+                </div>
+              <p> </p>
+              <p> The reasons for avoiding these foods are :</p>
+              <p>Chocolate contains theobromine and caffeine, both of which are toxic to dogs. Unlike humans, dogs metabolize these substances much more slowly, leading to a dangerous buildup in their system. Ingesting chocolate can result in a range of symptoms, including vomiting, diarrhea, rapid breathing, increased heart rate, and seizures. In severe cases, chocolate consumption can be fatal, making it crucial for dog owners to keep all forms of chocolate out of reach.</p>
+
+
+                  <p>  Grapes and raisins can cause acute kidney failure in dogs, even in small amounts. The exact substance responsible for this toxic reaction is still unknown, but the effects can be severe. Symptoms of grape or raisin toxicity may include vomiting, diarrhea, lethargy, and loss of appetite. Some dogs may be more sensitive to these fruits than others, so it’s best to avoid giving them to dogs altogether.</p>
+
+                  <p>  Onions and garlic contain compounds called thiosulfates, which can be harmful to dogs. These substances can damage a dog's red blood cells, leading to hemolytic anemia. Symptoms of onion or garlic toxicity may include weakness, lethargy, vomiting, and gastrointestinal upset. Even small amounts can be dangerous, especially when consumed over time, so it’s important to avoid feeding dogs any foods that contain these ingredients.</p>
+
+                  <p>   Avocado contains a substance called persin, which can be toxic to dogs in large amounts. While the flesh of the avocado is generally safe in small quantities, the pit, skin, and leaves contain higher levels of persin and pose a greater risk. Symptoms of avocado toxicity can include vomiting and diarrhea. To ensure the safety of your dog, it’s best to avoid giving them avocado altogether.</p>
+
+                  <p>   Alcohol is extremely toxic to dogs, even in small amounts. Ingesting alcohol can lead to severe symptoms such as vomiting, diarrhea, difficulty breathing, tremors, and even coma or death. Dogs are much more sensitive to alcohol than humans, and it can cause significant damage to their liver and brain. Therefore, it is crucial to keep all alcoholic beverages and products out of reach of pets.</p>
+
+                  <p>   Caffeine, found in coffee, tea, and some sodas, is toxic to dogs. It can cause restlessness, rapid breathing, heart palpitations, and muscle tremors. In severe cases, caffeine ingestion can lead to seizures and even death. Since dogs metabolize caffeine much more slowly than humans, even small amounts can be dangerous, making it essential to keep caffeinated products away from dogs.</p>
+
+                  <p>   Xylitol is a sugar substitute commonly found in many sugar-free products, such as gum, candies, and baked goods. It can cause a rapid release of insulin in dogs, leading to hypoglycemia (low blood sugar). Symptoms of xylitol toxicity may include vomiting, loss of coordination, seizures, and liver failure. Given its widespread use in human food products, it’s vital for dog owners to read labels carefully and avoid giving their pets anything containing xylitol.</p>
+
+                  <p>   Cherries contain cyanide in their pits, stems, and leaves, which can be toxic to dogs. Ingesting these parts of the cherry can lead to serious health issues, including difficulty breathing, red gums, and even death. While the flesh of the cherry is not toxic, the risk of choking on the pit and the potential for cyanide poisoning make cherries a food to avoid for dogs. It’s best to keep cherries and their byproducts away from pets to ensure their safety.</p>
+
+
+            <h4>Supplements</h4>
+                <p>While a balanced diet should provide all necessary nutrients, some dogs may benefit from supplements, such as:</p>
+
+                <div class="supplements">
+                    <div class="supplement-item">
+                        <img src="{% static 'index/images/fish.jpeg' %}" alt="Omega-3 Fatty Acids" class="img-fluid supplement-image left">
+                        <div class="supplement-description">
+                            <p><strong>Omega-3 Fatty Acids</strong> for skin and coat health.</p>
+                            <p>Omega-3 fatty acids are essential fats that play a crucial role in maintaining your dog's overall health. These fatty acids, commonly found in fish oil and flaxseed oil, are known for their anti-inflammatory properties, which can help alleviate conditions such as arthritis and skin allergies. Omega-3s support healthy skin and a shiny coat, reduce shedding, and can even improve heart health. Additionally, they are beneficial for cognitive function, making them particularly important for senior dogs. Incorporating Omega-3 fatty acids into your dog's diet can lead to improved joint mobility, enhanced immune function, and overall well-being.</p>
+                        </div>
+                    </div>
+
+                    <div class="supplement-item">
+                        <div class="supplement-description">
+                            <p><strong>Glucosamine</strong> for joint support.</p>
+                            <p>Glucosamine is a natural compound found in cartilage, the tissue that cushions joints. It is commonly used as a supplement to support joint health in dogs, especially those that are aging or have joint issues such as arthritis. Glucosamine helps to rebuild cartilage, reduce inflammation, and alleviate pain associated with joint degeneration. By promoting joint lubrication and flexibility, glucosamine can enhance your dog's mobility and quality of life. Many veterinarians recommend glucosamine supplements for dogs that are prone to joint problems or for those recovering from joint surgery.</p>
+
+                        </div>
+                        <img src="{% static 'index/images/gluco.jpeg' %}" alt="Glucosamine" class="img-fluid supplement-image right">
+                    </div>
+
+                    <div class="supplement-item">
+                        <img src="{% static 'index/images/pro.jpeg' %}" alt="Probiotics" class="img-fluid supplement-image left">
+                        <div class="supplement-description">
+                            <p><strong>Probiotics</strong> for digestive health.</p>
+                            <p>Probiotics are beneficial bacteria that support digestive health in dogs. These live microorganisms help maintain a healthy balance of gut flora, which is essential for proper digestion and nutrient absorption. Probiotics can be particularly useful for dogs experiencing gastrointestinal issues, such as diarrhea, constipation, or bloating. They can also enhance the immune system by promoting a healthy gut environment, which is crucial for overall health. Regularly incorporating probiotics into your dog's diet can lead to improved digestion, better nutrient absorption, and a stronger immune response, making them a valuable addition to your dog's nutritional regimen. Summary</p>
+                        </div>
+                    </div>
+                </div>
+
+
+
+
+            <h4>Consulting a Veterinarian</h4>
+            <p>Always consult with your veterinarian before making significant changes to your dog's diet or if you have concerns about their nutritional needs. They can provide personalized recommendations based on your dog's health, age, and lifestyle.</p>
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </section> <!-- .section -->
+      <p style="text-align: center;">
+			<a href="{% url 'chatbot' %}" class="btn btn-primary mr-md-4 py-3 px-4">
+			CLICK YOUR QUERY<span class="ion-ios-arrow-forward"></span>
+			</a>
+		  </p>
+
+    <footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+						<h2 class="footer-heading">Canine Care</h2>
+						<p>Because every tail wag deserves the best care.....</p>
+						<ul class="ftco-footer-social p-0">
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+            </ul>
+					</div>
+
+					<div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+						<h2 class="footer-heading">Quick Links</h2>
+						<ul class="list-unstyled">
+              <li><a href="{% url 'homepage' %}" class="py-2 d-block">Home</a></li>
+              <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+              <li><a href="{% url 'initial_select' %}" class="py-2 d-block">Breeds</a></li>
+              <li><a href="{% url 'gallery' %}" class="py-2 d-block">Gallery</a></li>
+              <li><a href="{% url 'chatbot' %}" class="py-2 d-block">Ask</a></li>
+
+              <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
+            </ul>
+					</div>
+					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+						<h2 class="footer-heading">Have a Questions?</h2>
+						<div class="block-23 mb-3">
+              <ul>
+                <li><span class="icon fa fa-map"></span><span class="text">456 Imaginary Ave.Redwood City,San Francisco, California, USA</span></li>
+                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">canineinfo456@gmail.com</span></a></li>
+              </ul>
+            </div>
+					</div>
+				</div>
+				<div class="row mt-5">
+          <div class="col-md-12 text-center">
+
+
+        </div>
+			</div>
+		</footer>
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+      <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+      </svg>
+    </div>
+
+    <script src="{% static 'index/js/jquery.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'index/js/popper.min.js' %}"></script>
+    <script src="{% static 'index/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'index/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'index/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'index/js/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static 'index/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'index/js/scrollax.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'index/js/google-map.js' %}"></script>
+    <script src="{% static 'index/js/main.js' %}"></script>
+  </body>
+</html>

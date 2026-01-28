@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <title>Canine Care</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'index/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/magnific-popup.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/style.css' %}">
+
+    <style>
+       body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 20px;
+       }
+
+        .chat-container {
+            width: 700px;
+            max-width: 90%;
+            display: flex;
+            flex-direction: column;
+            border: 2px solid #ccc;
+            border-radius: 10px;
+            padding: 10px;
+            background-color: #fff;
+            margin: 20px auto;
+        }
+
+        .chat-box {
+            height: 360px;
+            overflow-y: auto;
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .input-container {
+            display: flex;
+            padding: 10px;
+            gap: 8px;
+        }
+
+        input[type="text"] {
+            flex: 1;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 6px;
+            font-size: 16px;
+            outline: none;
+            transition: border 0.3s ease-in-out;
+        }
+
+        input[type="text"]:focus {
+            border-color: #2980b9;
+        }
+
+        button {
+            padding: 12px 16px;
+            background-color: #2c3e50;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease-in-out;
+        }
+
+        button:hover {
+            background-color: #34495e;
+        }
+
+        /* Chat messages */
+        .message {
+            max-width: 80%;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            line-height: 1.4;
+            display: inline-block;
+        }
+
+        .user-message {
+            align-self: flex-end;
+            background-color: #2c3e50;
+            color: white;
+            border-top-right-radius: 0;
+        }
+
+        .bot-message {
+           background-color: #d4f8c6; /* Light green */
+            align-self: flex-start; /* Align bot messages to the left */
+            color: #333;
+            border-top-left-radius: 0;
+        }
+
+        /* Keyword suggestions */
+        .keyword {
+            cursor: pointer;
+            color: #2980b9;
+            text-decoration: underline;
+            display: inline-block;
+            margin: 5px;
+            font-size: 14px;
+        }
+
+        .keyword:hover {
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .suggestions {
+            margin-top: 8px;
+            padding: 5px;
+        }
+    </style>
+  </head>
+  <body>
+
+    <div class="wrap">
+			<div class="container">
+				<div class="row">
+
+
+					</div>
+				</div>
+			</div>
+		</div>
+		<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	    	<a class="navbar-brand" href="{% url 'homepage' %}"><span class="flaticon-pawprint-1 mr-2"></span>CANINE CARE</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="fa fa-bars"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	        	<li class="nav-item "><a href="{% url 'homepage' %}" class="nav-link">Home</a></li>
+	        	<li class="nav-item "><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	        	<li class="nav-item"><a href="{% url 'initial_select' %}" class="nav-link">Breeds</a></li>
+
+	          <li class="nav-item"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
+	          <li class="nav-item active"><a href="{% url 'chatbot' %}" class="nav-link">Ask</a></li>
+
+
+	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+
+
+
+
+    <div class="chat-container">
+        <div class="chat-box" id="chat-box"></div>
+        <div class="input-container">
+            <input type="text" id="user-input" placeholder="Type a keyword..." oninput="showSuggestions()" />
+            <button onclick="findKeywords()">Send</button>
+        </div>
+        <div id="suggestions" class="suggestions"></div>
+    </div>
+
+    <script>
+        const keywords = {
+            "breeds": "Popular dog breeds include Labrador, German Shepherd, and Golden Retriever.",
+            "food": "High-quality dog food should list meat as the first ingredient.",
+            "training": "Positive reinforcement is the best way to train your dog.",
+            "exercise": "Dogs need regular exercise! Aim for at least 30 minutes of activity each day.",
+            "amount": "The amount of food depends on your dog's size, age, and activity level. Generally, follow the feeding guidelines on the dog food package or consult your vet.",
+            "human food": "Some human foods are safe for dogs, like plain cooked chicken or carrots, but many are not. Always check with your vet before sharing human food with your dog.",
+            "bathe": "Most dogs only need a bath every 1-3 months, but it can vary based on the breed and lifestyle.",
+            "potty train": "Take your puppy outside frequently, especially after meals and naps. Praise them when they go outside. Consistency is key!",
+            "vet": "Adult dogs should see a vet at least once a year for a check-up, while puppies and senior dogs may need more frequent visits.",
+            "chew": "Dogs may chew on furniture due to boredom, anxiety, or teething. Providing chew toys and regular exercise can help reduce this behavior.",
+            "commands": "Basic commands include 'sit', 'stay', 'come', 'down', and 'leave it'. Use positive reinforcement.",
+            "groom": "Pugs should be groomed regularly, typically every 4-6 weeks. Regular brushing helps reduce shedding and keeps their skin healthy.",
+            "best food": "The best dog food varies based on your dog's age, breed, size, and health needs. Consult your vet for personalized recommendations.",
+            "treat": "Treats should be given in moderation and should not exceed 10% of a dog's daily caloric intake.",
+            "teeth": "Regular dental care, including brushing and dental treats, is important for a dog's oral health.",
+            "nail": "Regular nail trimming is important to prevent overgrowth and discomfort. Aim to trim nails every 3-4 weeks.",
+            "vaccination": "Common vaccinations include rabies, distemper, parvovirus, and bordetella. Consult your vet for a vaccination schedule.",
+            "nutrition": "Proper nutrition is crucial for your dog's health. A balanced diet should include proteins, carbohydrates, healthy fats, and vitamins.",
+            "feed": "Dogs should be fed a balanced diet, including high-quality commercial dog food or a vet-approved homemade diet.",
+            "socialization": "Socialization is important for puppies. Expose them to different people, environments, and other animals to help them become well-adjusted adults.",
+            "allergies": "Common signs of allergies in dogs include itching, redness, and gastrointestinal issues. Consult your vet for diagnosis and treatment.",
+            "exercise needs": "Different breeds have different exercise needs. Active breeds like Border Collies require more exercise than breeds like Bulldogs.",
+            "dog parks": "Dog parks can be a great place for your dog to socialize and exercise, but always supervise your dog and ensure they are well-behaved.",
+            "flea prevention": "Flea prevention is crucial for your dog's health. Consult your vet for the best flea prevention products.",
+            "spaying/neutering": "Spaying or neutering your dog can prevent unwanted litters and may reduce certain health risks.",
+            "dog grooming": "Regular grooming helps keep your dog's coat healthy and can prevent matting and skin issues.",
+            "dog behavior": "Understanding dog behavior can help you train and bond with your pet. Consider consulting a professional trainer for guidance.",
+            "puppy care": "Puppies require special care, including vaccinations, socialization, and proper nutrition to ensure healthy growth.",
+            "senior dogs": "Senior dogs may require special diets, more frequent vet visits, and adjustments in exercise to accommodate their age.",
+            " anxiety": "Signs of anxiety in dogs can include excessive barking, chewing, or hiding. Consult your vet for strategies to help manage anxiety.",
+            "hydration": "Always ensure your dog has access to fresh water. Dogs should drink about 1 ounce of water per pound of body weight daily.",
+            "travel": "When traveling with your dog, ensure they are comfortable and safe. Use a pet seatbelt or carrier and take regular breaks.",
+            " training classes": "Consider enrolling your dog in training classes to improve obedience and socialization skills.",
+            "dog-friendly activities": "Activities like hiking, swimming, and playing fetch are great ways to bond with your dog while providing exercise.",
+            " safety": "Ensure your home is safe for your dog by removing hazards like toxic plants, small objects, and chemicals.",
+            " insurance": "Pet insurance can help cover unexpected veterinary costs. Research different plans to find one that suits your needs.",
+            " adoption": "Adopting a dog is a rewarding experience. Consider visiting local shelters or rescue organizations to find your new friend.",
+            " breeds for families": "Family-friendly dog breeds include Golden Retrievers, Labrador Retrievers, and Beagles, known for their friendly nature.",
+            "grooming tools": "Essential grooming tools include brushes, combs, nail clippers, and dog-specific shampoos.",
+            "skin care": "Regularly check your dog's skin for signs of irritation or parasites. Consult your vet for skin care products.",
+            " heart health": "Regular exercise and a balanced diet are crucial for maintaining your dog's heart health.",
+            "weight management": "Monitor your dog's weight and adjust their diet and exercise accordingly to prevent obesity.",
+            " first aid": "Basic first aid for dogs includes knowing how to treat cuts, burns, and choking. Consider taking a pet first aid course.",
+            "behavior problems": "Common behavior problems include barking, digging, and aggression. Consult a trainer for solutions.",
+            " companionship": "Dogs are social animals and thrive on companionship. Spend quality time with your dog daily.",
+            " playtime": "Interactive playtime is essential for your dog's mental and physical health. Use toys that stimulate their instincts.",
+            " seasonal care": "Adjust your dog's care routine with the seasons, such as providing extra hydration in summer and warmth in winter.",
+            " training techniques": "Popular training techniques include clicker training, leash training, and crate training.",
+            " health check": "Regular health checks at the vet can help catch potential issues early.",
+            "social skills": "Encourage good social skills by exposing your dog to various environments and other dogs.",
+            "barking reasons": "Dogs bark for various reasons, including boredom, alerting, or seeking attention. Understanding the cause can help address it.",
+            "leash training": "Leash training is essential for safe walks. Use positive reinforcement to teach your dog to walk calmly on a leash.",
+            "dog enrichment activities": "Enrichment activities like puzzle toys and scent games can keep your dog mentally stimulated.",
+            "dog-friendly plants": "If you have plants at home, ensure they are non-toxic to dogs. Common safe plants include spider plants and Boston ferns.",
+            " grooming frequency": "The frequency of grooming depends on the breed. Long-haired breeds may need grooming every few weeks, while short-haired breeds may need it less often.",
+            "dental health": "Regular dental check-ups and at-home brushing can prevent dental disease in dogs.",
+            "training resources": "Consider using books, online courses, or local trainers to improve your dog's training.",
+            " companionship benefits": "Having a dog can reduce stress, increase physical activity, and provide companionship.",
+            " behavior signals": "Learn to recognize your dog's body language and vocalizations to better understand their feelings.",
+            " dog-friendly vacations": "When planning a vacation, look for dog-friendly accommodations and activities to include your pet.",
+            "rescue organizations": "Support local dog rescue organizations by volunteering or donating to help dogs in need.",
+            " health supplements": "Consult your vet about health supplements that may benefit your dog's specific needs.",
+            "dog grooming basics": "Dog grooming involves brushing, bathing, nail trimming, and ear cleaning to maintain your dog's hygiene and appearance.",
+            "how to brush a dog": "Use a brush suitable for your dog's coat type. Brush gently, starting from the head and moving towards the tail, to remove tangles and loose fur.",
+            "dog bathing frequency": "Most dogs should be bathed every 1-3 months, but this can vary based on their coat type and lifestyle. Consult your vet for specific recommendations.",
+            "best dog shampoo": "Use a dog-specific shampoo that is pH balanced for their skin. Avoid human shampoos, as they can irritate a dog's skin.",
+            "how to trim dog nails": "Use a dog nail clipper and trim just the tip of the nail, avoiding the quick (the pink part inside the nail). If unsure, consult a groomer.",
+            "ear cleaning for dogs": "Use a vet-approved ear cleaner and a cotton ball to gently clean your dog's ears. Avoid using cotton swabs, as they can push debris further in.",
+            "dog coat types": "Different coat types require different grooming techniques. For example, long-haired dogs may need more frequent brushing than short-haired dogs.",
+            "de-shedding tools": "De-shedding tools like the Furminator can help reduce shedding in dogs with thick or double coats.",
+            "dog grooming at home": "You can groom your dog at home with the right tools and techniques. Start slowly and make it a positive experience for your dog.",
+            "professional dog grooming": "Consider taking your dog to a professional groomer for services like haircuts, de-shedding, and specialized treatments.",
+            "dog grooming for puppies": "Introduce grooming to puppies gradually. Use gentle brushes and make the experience positive with treats and praise.",
+            "grooming for senior dogs": "Senior dogs may require special grooming considerations, such as gentler handling and more frequent baths to keep their skin healthy.",
+            "dog grooming safety": "Always use grooming tools designed for dogs and be cautious around sensitive areas like the eyes, ears, and paws.",
+            "how to remove mats from dog fur": "Use a de-matting tool or a slicker brush to gently work out mats. If mats are severe, consider seeking professional help.",
+            "dog grooming supplies": "Essential grooming supplies include brushes, combs, nail clippers, dog shampoo, and ear cleaning solution.",
+            "grooming for show dogs": "Show dogs often require specific grooming styles to meet breed standards. Consult a professional groomer for show preparation.",
+            "dog grooming tips for shedding": "Regular brushing, using de-shedding tools, and maintaining a healthy diet can help reduce shedding.",
+            "how to clean dog teeth": "Use a dog-specific toothbrush and toothpaste to brush your dog's teeth regularly. Dental chews can also help maintain oral health.",
+            "dog grooming for allergies": "If your dog has allergies, consult your vet for hypoallergenic grooming products and techniques to minimize allergens.",
+            "grooming for different breeds": "Different breeds have unique grooming needs. Research your dog's breed to understand their specific grooming requirements.",
+            "how to handle a nervous dog during grooming": "Use calming techniques, such as treats and gentle handling, to help a nervous dog feel more comfortable during grooming.",
+            "dog grooming appointments": "Schedule regular grooming appointments to keep your dog's coat healthy and to catch any skin issues early.",
+            "grooming for dogs with sensitive skin": "Use gentle, hypoallergenic grooming products for dogs with sensitive skin to avoid irritation.",
+            "dog nutrition basics": "Dog nutrition involves providing a balanced diet that includes proteins, carbohydrates, fats, vitamins, and minerals.",
+            "best dog food brands": "Some reputable dog food brands include Royal Canin, Hill's Science Diet, Blue Buffalo, and Orijen. Always consult your vet for recommendations.",
+            "homemade dog food": "Homemade dog food can be healthy if prepared correctly. Consult your vet for recipes that meet your dog's nutritional needs.",
+            "dog food labels": "When reading dog food labels, look for high-quality protein sources, avoid fillers, and ensure it meets AAFCO standards.",
+            "grain-free dog food": "Grain-free diets may benefit some dogs, especially those with grain allergies, but they are not necessary for all dogs. Consult your vet.",
+            "puppy nutrition": "Puppies require a diet rich in protein and calories to support their rapid growth. Look for puppy-specific food.",
+            "senior dog nutrition": "Senior dogs may require lower-calorie diets with added joint support. Consult your vet for specific recommendations.",
+            "dog food allergies": "Common signs of food allergies in dogs include itching, gastrointestinal upset, and ear infections. Consult your vet for diagnosis.",
+            "how much to feed a dog": "The amount of food to feed your dog depends on their size, age, and activity level. Follow the feeding guidelines on the food package.",
+            "dog treats": "Treats should be given in moderation and should not exceed 10% of your dog's daily caloric intake.",
+            "raw dog food diet": "A raw food diet can be beneficial for some dogs, but it requires careful planning to ensure nutritional balance. Consult your vet.",
+            "dog hydration": "Always provide fresh water for your dog. Dogs should drink about 1 ounce of water per pound of body weight daily.",
+            "dog obesity": "Obesity in dogs can lead to serious health issues. Monitor your dog's weight and adjust their diet and exercise accordingly.",
+            "vitamins for dogs": "Certain vitamins, like A, D, E, and K, are essential for dogs. Consult your vet before giving any supplements.",
+            "dog food storage": "Store dog food in a cool, dry place in an airtight container to maintain freshness and prevent pests.",
+            "transitioning dog food": "When switching dog food, do it gradually over 7-10 days to avoid digestive upset. Mix the new food with the old food.",
+            "dog food for specific breeds": "Some breeds may have specific dietary needs. Consult your vet for recommendations tailored to your dog's breed.",
+            "dog food recalls": "Stay informed about dog food recalls by checking the FDA website or subscribing to pet food safety alerts.",
+            "how to read dog food ingredients": "Ingredients are listed in order of weight. Look for named meat sources as the first ingredient and avoid vague terms like 'meat by-products.'",
+            "dog food for active dogs": "Active dogs may require higher protein and calorie diets to support their energy levels. Consult your vet for recommendations.",
+            "dog food for sensitive stomachs": "Dogs with sensitive stomachs may benefit from easily digestible foods. Look for formulas designed for sensitive digestion.",
+            "how to make dog food": "You can make dog food at home using ingredients like lean meats, vegetables, and grains. Consult your vet for balanced recipes.",
+            "dog food portion control": "Use measuring cups to ensure you are feeding the correct portion size based on your dog's weight and activity level.",
+            "dog food for dental health": "Some dog foods are formulated to promote dental health by reducing plaque and tartar buildup. Look for dental-specific formulas.",
+            "how to choose dog food": "Choose dog food based on your dog's age, size, breed, and health needs. Consult your vet for personalized recommendations.",
+            "common dog diseases": "Common dog diseases include parvovirus, distemper, kennel cough, and heartworm. Regular vet check-ups can help catch these early.",
+            "parvovirus": "Parvovirus is a highly contagious viral infection that affects dogs, especially puppies. Symptoms include severe vomiting and diarrhea. Vaccination is key for prevention.",
+            "distemper": "Canine distemper is a viral disease that affects the respiratory, gastrointestinal, and nervous systems. Vaccination is crucial to prevent this disease.",
+            "kennel cough": "Kennel cough is a contagious respiratory disease. It often resolves on its own, but severe cases may require veterinary treatment.",
+            "heartworm": "Heartworm is a serious disease caused by parasites transmitted through mosquito bites. Preventive medication is essential to protect your dog.",
+            "allergies in dogs": "Common allergies in dogs include food allergies, environmental allergies (like pollen), and flea allergies. Symptoms can include itching, redness, and gastrointestinal upset.",
+            "food allergies": "Food allergies can cause symptoms like itching, ear infections, and digestive issues. Consult your vet for an elimination diet to identify allergens.",
+            "environmental allergies": "Environmental allergies can be managed with antihistamines or allergy shots. Regular cleaning can help reduce allergens in your home.",
+            "flea allergies": "Flea allergy dermatitis is a common condition in dogs. Regular flea prevention is essential to avoid this issue.",
+            "vaccination schedule": "Puppies typically receive vaccinations at 6-8 weeks, with boosters every 3-4 weeks until they are about 16 weeks old. Consult your vet for a specific schedule.",
+            "core vaccines": "Core vaccines for dogs include rabies, distemper, parvovirus, and adenovirus. These are essential for all dogs.",
+            "non-core vaccines": "Non-core vaccines may include those for Lyme disease, Bordetella, and canine influenza. Discuss with your vet to determine what's necessary for your dog.",
+            "vaccination side effects": "Some dogs may experience mild side effects from vaccinations, such as lethargy or a slight fever. Serious reactions are rare but require immediate veterinary attention.",
+            "senior dog health": "Senior dogs may be more susceptible to diseases. Regular vet check-ups and a tailored diet can help maintain their health.",
+            "preventive care": "Preventive care includes regular vet visits, vaccinations, parasite control, and a balanced diet to keep your dog healthy.",
+            "dog dental disease": "Dental disease is common in dogs and can lead to serious health issues. Regular dental cleanings and at-home brushing can help prevent it.",
+            "canine arthritis": "Arthritis is common in older dogs. Weight management, joint supplements, and anti-inflammatory medications can help manage symptoms.",
+            "canine diabetes": "Diabetes in dogs can be managed with insulin therapy and a special diet. Regular vet visits are essential for monitoring.",
+            "canine cancer": "Cancer can affect dogs of any age. Early detection through regular vet check-ups can improve treatment outcomes.",
+            "canine heart disease": "Heart disease can be managed with medication and dietary changes. Regular vet visits are crucial for monitoring heart health.",
+            "canine skin conditions": "Common skin conditions include hot spots, dermatitis, and infections. Regular grooming and vet check-ups can help maintain skin health.",
+            "canine urinary tract infections": "UTIs can cause frequent urination and discomfort. Consult your vet for diagnosis and treatment.",
+            "canine gastrointestinal issues": "Gastrointestinal issues can include vomiting and diarrhea. A bland diet and hydration are often recommended, but consult your vet for persistent issues.",
+            "canine obesity": "Obesity can lead to various health problems. A balanced diet and regular exercise are essential for maintaining a healthy weight.",
+            "canine vaccinations importance": "Vaccinations are crucial for preventing serious diseases and maintaining your dog's overall health. Always follow your vet's recommendations.",
+            "dog training basics": "Dog training involves teaching your dog commands and behaviors using positive reinforcement techniques.",
+            "positive reinforcement": "Positive reinforcement means rewarding your dog for good behavior, which encourages them to repeat that behavior.",
+            "basic commands": "Basic commands include 'sit', 'stay', 'come', 'down', and 'leave it'. These commands are essential for good behavior.",
+            "how to teach sit": "To teach 'sit', hold a treat above your dog's nose and move it back over their head. As they look up, their bottom will lower. Say 'sit' and reward them.",
+            "how to teach stay": "To teach 'stay', ask your dog to sit, then open your hand in front of them and say 'stay'. Take a step back, and if they stay, reward them.",
+            "how to teach come": "To teach 'come', call your dog’s name followed by 'come' in a happy tone. Reward them when they reach you.",
+            "how to teach down": "To teach 'down', start with your dog in a sitting position. Hold a treat in front of their nose and move it down to the ground. Say 'down' and reward them.",
+            "how to teach leave it": "To teach 'leave it', place a treat in your hand and close your fist. When your dog stops trying to get it, say 'leave it' and reward them with a different treat.",
+            "clicker training": "Clicker training uses a small device that makes a clicking sound to mark desired behaviors. It’s a great way to communicate with your dog.",
+            "socialization tips": "Socialize your dog by exposing them to different people, environments, and other animals. Start early for the best results.",
+            "training sessions": "Keep training sessions short and fun, around 5-10 minutes, to maintain your dog's attention and enthusiasm.",
+            "common training mistakes": "Common mistakes include using negative reinforcement, being inconsistent, and not rewarding good behavior.",
+            "how to correct bad behavior": "Redirect your dog's attention to a positive behavior and reward them for that. Avoid punishment, as it can lead to fear and anxiety.",
+            "dog training classes": "Consider enrolling your dog in training classes for professional guidance and socialization opportunities.",
+            "advanced commands": "Advanced commands include 'roll over', 'play dead', and 'fetch'. These can be taught after mastering basic commands.",
+            "training tools": "Useful training tools include clickers, treats, harnesses, and training leashes. Choose tools that suit your dog's needs.",
+            "how to handle distractions": "Train in a quiet environment first, then gradually introduce distractions. Reward your dog for staying focused.",
+            "patience in training": "Training takes time and patience. Be consistent and understanding, and celebrate small successes.",
+            "how to train an older dog": "Older dogs can learn new commands too! Use positive reinforcement and be patient, as they may take longer to adapt.",
+            "how to train a puppy": "Start training your puppy as early as possible. Use positive reinforcement and keep sessions short and engaging.",
+            "dog training resources": "Consider using books, online courses, or local trainers to improve your dog's training.",
+            "how to teach tricks": "Teaching tricks can be a fun way to bond with your dog. Use positive reinforcement and break the trick down into small steps.",
+            "how to stop barking": "To reduce excessive barking, identify the cause and address it. Training commands like 'quiet' can also help.",
+            "how to train a fearful dog": "Use gentle, positive reinforcement techniques to build confidence in fearful dogs. Avoid forcing them into stressful situations.",
+            "how to train a service dog": "Training a service dog requires specialized training and certification. Consult a professional trainer for guidance.",
+            "how to train a dog to walk on a leash": "To train your dog to walk on a leash, start in a quiet area. Use treats to encourage them to walk beside you and reward them for staying close.",
+            "how to teach a dog to fetch": "To teach fetch, throw a toy a short distance and encourage your dog to bring it back. Reward them when they return the toy.",
+            "how to teach a dog to roll over": "To teach 'roll over', have your dog lie down, then use a treat to guide them onto their side and then onto their back. Reward them for completing the roll.",
+            "how to teach a dog to shake hands": "To teach 'shake', have your dog sit, then gently lift their paw while saying 'shake'. Reward them when they lift their paw on their own.",
+            "how to train a dog to stay off furniture": "Use commands like 'off' and reward your dog when they stay on the floor. Provide a comfortable dog bed as an alternative.",
+            "how to train a dog to go to their bed": "Use treats to guide your dog to their bed. Say 'go to bed' and reward them when they lie down. Repeat until they understand the command.",
+            "how to train a dog to stop jumping": "Teach your dog to sit when greeting people. Reward them for sitting instead of jumping up.",
+            "how to train a dog to come when called": "Practice calling your dog in a safe, enclosed area. Use a happy tone and reward them when they come to you.",
+            "how to train a dog to not bark at strangers": "Use commands like 'quiet' and reward your dog for remaining calm when strangers approach. Gradually expose them to new people.",
+            "how to train a dog to not pull on the leash": "Use a no-pull harness and stop walking when your dog pulls. Resume walking when they are calm and beside you.",
+            "how to train a dog to be comfortable with grooming": "Introduce grooming gradually. Use treats and praise to create a positive association with grooming tools and processes.",
+            "how to train a dog to accept a muzzle": "Introduce the muzzle gradually, allowing your dog to sniff it. Reward them for wearing it for short periods, gradually increasing the time.",
+            "how to train a dog to be alone": "Start by leaving your dog alone for short periods and gradually increase the time. Provide toys to keep them occupied.",
+            "how to train a dog to not be aggressive": "Identify triggers for aggressive behavior and work on desensitization. Consult a professional trainer for guidance.",
+            "how to train a dog to be friendly with other dogs": "Socialize your dog with other dogs in controlled environments. Use positive reinforcement to reward calm behavior.",
+            "how to train a dog to not beg for food": "Teach commands like 'go to your place' during meal times and reward them for staying there.",
+            "how to train a dog to not chase after cars": "Use a leash and practice commands like 'come' and 'leave it' in safe environments. Gradually expose them to moving vehicles.",
+            "how to train a dog to not dig": "Provide plenty of exercise and mental stimulation to reduce boredom. Redirect them to appropriate digging areas if they dig.",
+            "how to train a dog to not bark at the doorbell": "Desensitize your dog to the doorbell by ringing it and rewarding them for staying calm. Practice frequently.",
+            "how to train a dog to not steal food": "Teach commands like 'leave it' and reward them for ignoring food on counters or tables.",
+            "how to train a dog to be calm during vet visits": "Practice handling your dog at home and reward them for calm behavior. Bring treats to the vet to create positive associations.",
+            "how to train a dog to not be fearful of loud noises": "Expose your dog to loud noises gradually, rewarding them for remaining calm. Use desensitization techniques.",
+            "how to train a dog to not be possessive over toys": "Teach commands like 'drop it' and reward them for sharing toys. Practice with multiple toys to reduce possessiveness.",
+            "how to train a dog to not be shy around new people": "Encourage positive interactions with new people using treats and praise. Gradually expose your dog to different individuals.",
+            "how to train a dog to be patient": "Practice commands like 'wait' and reward your dog for staying calm in situations where they might get excited.",
+            "hot weather care": "In hot weather, ensure your dog has access to shade and fresh water. Avoid walking them during peak heat hours to prevent overheating.",
+            "cold weather care": "In cold weather, provide a warm shelter for your dog and consider dog sweaters or coats for short-haired breeds.",
+            "signs of heatstroke": "Signs of heatstroke in dogs include excessive panting, drooling, weakness, and confusion. If you suspect heatstroke, cool your dog down and contact your vet immediately.",
+            "signs of hypothermia": "Signs of hypothermia include shivering, lethargy, and difficulty walking. If your dog shows these symptoms, warm them gradually and seek veterinary care.",
+            "allergies symptoms": "Common allergy symptoms in dogs include itching, redness, ear infections, and gastrointestinal upset. Consult your vet for diagnosis and treatment.",
+            "flea allergy symptoms": "Flea allergy dermatitis can cause intense itching, hair loss, and skin infections. Regular flea prevention is essential.",
+            "food allergy symptoms": "Food allergies can manifest as itching, vomiting, diarrhea, and ear infections. An elimination diet can help identify the allergen.",
+            "environmental allergy symptoms": "Environmental allergies may cause sneezing, itching, and watery eyes. Antihistamines or allergy shots may help manage symptoms.",
+            "signs of dehydration": "Signs of dehydration in dogs include dry gums, lethargy, and loss of skin elasticity. Always provide fresh water and monitor their intake.",
+            "symptoms of kennel cough": "Kennel cough symptoms include a dry, honking cough, sneezing, and nasal discharge. It is usually self-limiting but consult your vet if symptoms persist.",
+            "symptoms of parvovirus": "Parvovirus symptoms include severe vomiting, diarrhea (often bloody), lethargy, and loss of appetite. This is a serious condition requiring immediate veterinary care.",
+            "symptoms of distemper": "Distemper symptoms include fever, coughing, nasal discharge, vomiting, and neurological signs. Vaccination is key for prevention.",
+            "symptoms of heartworm": "Symptoms of heartworm disease include coughing, lethargy, and difficulty breathing. Preventive medication is essential.",
+            "symptoms of arthritis": "Signs of arthritis in dogs include limping, difficulty standing or climbing stairs, and reluctance to play. Consult your vet for management options.",
+            "symptoms of diabetes": "Symptoms of diabetes in dogs include increased thirst, frequent urination, and weight loss. Regular vet check-ups are important for management.",
+            "symptoms of cancer": "Common signs of cancer in dogs include unexplained weight loss, lumps, changes in appetite, and lethargy. Early detection is crucial.",
+            "symptoms of urinary tract infections": "UTI symptoms include frequent urination, straining to urinate, and blood in the urine. Consult your vet for diagnosis and treatment.",
+            "symptoms of gastrointestinal issues": "Gastrointestinal issues can manifest as vomiting, diarrhea, and loss of appetite. A bland diet may help, but consult your vet for persistent issues.",
+            "symptoms of skin infections": "Signs of skin infections include redness, swelling, and discharge. Regular grooming and vet check-ups can help maintain skin health.",
+            "symptoms of ear infections": "Ear infection symptoms include shaking the head, scratching at the ears, and foul odor. Regular ear cleaning can help prevent infections.",
+            "symptoms of anxiety": "Signs of anxiety in dogs can include excessive barking, chewing, hiding, and pacing. Consult your vet for strategies to help manage anxiety.",
+            "climate change effects on dogs": "Climate change can affect dogs through increased heat stress, changes in parasite populations, and altered habitats. Monitor your dog's health and adjust care accordingly.",
+            "how to keep dogs cool in summer": "Provide plenty of water, avoid walks during peak heat, and consider using cooling mats or vests to help keep your dog cool.",
+            "how to keep dogs warm in winter": "Ensure your dog has a warm, dry place to sleep, and consider using dog coats or sweaters for short-haired breeds during cold weather.",
+            "puppy care": "Puppies require special care, including vaccinations, socialization, and a diet rich in protein and calories to support their rapid growth. Ensure they have a safe environment to explore and play.",
+            "puppy socialization": "Socialize your puppy by exposing them to different people, environments, and other animals. Start early for the best results. Puppy classes can be a great way to facilitate this.",
+            "puppy training": "Start training your puppy as early as possible using positive reinforcement techniques. Focus on basic commands and house training. Consistency and patience are key.",
+            "adult dog care": "Adult dogs need regular exercise, a balanced diet, and routine vet check-ups to maintain their health and well-being. Engage them in daily activities to keep them mentally stimulated.",
+            "adult dog exercise": "Adult dogs typically need at least 30 minutes to 2 hours of exercise daily, depending on their breed and energy level. Activities can include walks, playtime, and agility training.",
+            "senior dog care": "Senior dogs may require special diets, more frequent vet visits, and adjustments in exercise to accommodate their age. Joint supplements and a comfortable resting area can enhance their quality of life.",
+            "senior dog exercise": "Senior dogs may require less intense exercise. Short, gentle walks and playtime can help keep them active without overexerting them. Monitor their energy levels and adjust accordingly.",
+            "hairy dog care": "Hairy dogs require regular grooming to prevent matting and reduce shedding. Brush their coat at least once a week, or more frequently for long-haired breeds. Regular baths can also help maintain coat health.",
+            "non-hairy dog care": "Non-hairy dogs, like Greyhounds, may require less grooming but still need regular baths and skin care to maintain their health. Pay attention to their skin condition and consult your vet if you notice any issues.",
+            "mixed breed care": "Mixed breed dogs can inherit traits from both parent breeds. Monitor their health and grooming needs based on their specific characteristics. Regular vet check-ups are essential for early detection of any issues.",
+            "newborn puppy care": "Newborn puppies need to stay with their mother for the first few weeks. If orphaned, they require special care, including bottle feeding and warmth. Ensure they are kept in a warm, safe environment.",
+            "diet for puppies": "Puppies need a diet rich in protein and calories. Look for high-quality puppy food that meets their nutritional needs. Consult your vet for specific recommendations based on your puppy's breed and size.",
+            "diet for adult dogs": "Adult dogs should be fed a balanced diet that meets their energy needs. Consult your vet for specific recommendations based on their size and activity level. Monitor their weight and adjust portions as needed.",
+            "diet for senior dogs": "Senior dogs may benefit from lower-calorie diets with added joint support. Consult your vet for specific dietary recommendations. Consider foods that are easy to digest and rich in nutrients.",
+            "grooming hairy dogs": "Hairy dogs may need grooming every few weeks to prevent matting. Use appropriate brushes and tools for their coat type. Regular grooming can also help you check for skin issues.",
+            "grooming non-hairy dogs": "Non-hairy dogs may require less frequent grooming but still need regular baths and skin care to maintain their health. Pay attention to their ears and skin, as they can be prone to infections.",
+            "health monitoring for mixed breeds": "Mixed breeds can be prone to health issues from either parent breed. Regular vet check-ups are essential for monitoring their health. Keep an eye on their weight and activity levels.",
+            "puppy vaccinations": "Puppies typically receive vaccinations at 6-8 weeks, with boosters every 3-4 weeks until they are about 16 weeks old. Consult your vet for a specific schedule to ensure your puppy is protected.",
+            "senior dog health checks": "Senior dogs should have more frequent vet visits to monitor for age-related health issues. Regular blood tests can help catch problems early. Discuss any changes in behavior or health with your vet.",
+            "exercise for hairy breeds": "Hairy breeds may require more grooming due to shedding. Regular exercise helps keep them healthy and can reduce shedding. Activities like fetch and agility training can be beneficial.",
+            "exercise for non-hairy breeds": "Non-hairy breeds still need regular exercise to maintain their health. Tailor their activity level to their energy needs. Daily walks and playtime are essential.",
+            "care for rescue dogs": "Rescue dogs may need extra patience and care as they adjust to their new environment. Provide a safe space and gradual introductions to new experiences. Consistent training can help build trust.",
+            "how to choose food for mixed breeds": "Choose food based on the dominant traits of your mixed breed. Consult your vet for personalized recommendations. Look for high-quality ingredients and avoid fillers.",
+            "how to introduce a new puppy to an adult dog": "Introduce a new puppy to an adult dog slowly and in a controlled environment. Supervise their interactions and reward positive behavior to help them bond.",
+            "how to manage multiple dogs": "When managing multiple dogs, establish a routine for feeding, exercise, and training. Ensure each dog receives individual attention to prevent jealousy.",
+            "What is a dog?": "A dog is a domesticated mammal, a subspecies of the gray wolf, and a popular pet.",
+            "How many dog breeds are there?": "There are over 360 officially recognized dog breeds worldwide.",
+            "How many dogs are there in the world?": "It is estimated that there are over 900 million dogs globally.",
+            "What is the most popular dog breed?": "The Labrador Retriever is often ranked as the most popular breed worldwide.",
+            "What is the lifespan of a dog?": "Dogs typically live between 10-15 years, depending on breed and size.",
+            "What are the largest and smallest dog breeds?": "The Great Dane is one of the largest, while the Chihuahua is one of the smallest.",
+            "How do dogs communicate?": "Dogs communicate through body language, barking, whining, and scent marking.",
+            "Why do dogs wag their tails?": "Dogs wag their tails to express emotions such as happiness, excitement, or nervousness.",
+            "Can dogs see in the dark?": "Dogs have better night vision than humans due to their tapetum lucidum.",
+            "What are the smartest dog breeds?": "Breeds like Border Collies, Poodles, and German Shepherds are considered highly intelligent.",
+            "What is the best diet for a dog?": "Dogs need a diet balanced in protein, fats, carbohydrates, vitamins, and minerals.",
+            "How much water should a dog drink daily?": "A dog should drink about 1 ounce of water per pound of body weight daily.",
+            "Can dogs eat dairy products?": "Some dogs can digest dairy, but others are lactose intolerant. Always introduce gradually.",
+            "What human foods are toxic to dogs?": "Toxic foods include chocolate, onions, garlic, grapes, raisins, and xylitol.",
+            "Should I give my dog supplements?": "Some dogs benefit from supplements like omega-3s, glucosamine, or probiotics.",
+            "What is the best food for puppies?": "Puppies need high-protein, high-calcium diets to support growth and development.",
+            "How do I switch my dog's food safely?": "Gradually mix new food with the old one over 7-10 days to avoid digestive upset.",
+            "Can dogs eat raw meat?": "Raw meat can be fed but should be balanced and handled safely to prevent bacterial infections.",
+            "What are the signs of food allergies in dogs?": "Signs of food allergies include itching, ear infections, and digestive issues.",
+            "Is grain-free food better for dogs?": "Grain-free diets may benefit some dogs, but they are not necessary for all dogs.",
+            "How often should I groom my dog?": "Grooming frequency depends on breed, coat type, and activity level.",
+            "What is the best way to trim a dog's nails?": "Use proper dog nail clippers and trim gradually to avoid cutting the quick.",
+            "How do I keep my dog's coat shiny?": "A healthy diet, regular brushing, and proper shampooing keep a coat shiny.",
+            "How do I remove mats from my dog's fur?": "Use a de-matting tool and conditioner to carefully remove mats.",
+            "Should I brush my dog's teeth?": "Brushing teeth 2-3 times a week helps prevent dental disease.",
+            "What kind of shampoo is best for dogs?": "Use mild, dog-specific shampoos to avoid skin irritation.",
+            "How do I clean my dog's ears safely?": "Use a damp cotton ball with vet-approved cleaner to clean ears safely.",
+            "What should I do if my dog has dry skin?": "Dry skin can be treated with moisturizing shampoos and omega-3 supplements.",
+            "Do short-haired dogs need grooming?": "Yes, even short-haired dogs need occasional brushing and bathing.",
+            "How do I stop my dog from shedding so much?": "Regular brushing and a balanced diet can help reduce shedding.",
+            "What are the most common diseases in dogs?": "Common diseases include parvovirus, distemper, kennel cough, and heartworm.",
+            "How can I tell if my dog has worms?": "Signs of worms include weight loss, bloated stomach, and visible worms in stool.",
+            "What is parvovirus in dogs?": "Parvovirus is a deadly viral disease affecting puppies and unvaccinated dogs.",
+            "What are the symptoms of canine distemper?": "Canine distemper causes respiratory, neurological, and gastrointestinal issues.",
+            "How do I know if my dog has hip dysplasia?": "Hip dysplasia is a genetic condition that leads to arthritis and mobility.",
+            "best toys for puppies": "Best toys for puppies include soft chew toys, interactive toys, and plush toys that are safe for their developing teeth.",
+            "best toys for adult dogs": "Adult dogs enjoy durable chew toys, fetch toys, and puzzle toys that stimulate their minds and keep them active.",
+            "best toys for senior dogs": "Senior dogs may benefit from softer toys that are easy to chew, as well as toys that encourage gentle play and mental stimulation.",
+            "interactive dog toys": "Interactive dog toys, such as treat-dispensing toys and puzzle games, can keep your dog mentally engaged and reduce boredom.",
+            "chew toys for dogs": "Chew toys help satisfy your dog's natural chewing instinct and can promote dental health. Look for durable options appropriate for your dog's size.",
+            "fetch toys for dogs": "Fetch toys, like balls and frisbees, are great for exercise and bonding time with your dog. Choose lightweight options for easy throwing.",
+            "toys for aggressive chewers": "For aggressive chewers, look for heavy-duty toys made from tough materials like rubber or nylon that can withstand strong jaws.",
+            "best dog beds": "The best dog beds provide comfort and support. Look for options with orthopedic foam for older dogs or those with joint issues.",
+            "dog grooming products": "Essential dog grooming products include brushes, combs, nail clippers, and dog-specific shampoos to maintain coat health.",
+            "dog training products": "Useful dog training products include clickers, training treats, and harnesses designed for positive reinforcement.",
+            "dog collars and leashes": "Choose collars and leashes that are comfortable and appropriate for your dog's size. Consider reflective options for safety during walks.",
+            "dog food and water bowls": "Look for sturdy, non-slip food and water bowls that are easy to clean. Elevated bowls can be beneficial for larger breeds.",
+            "dog crates and carriers": "Dog crates and carriers provide a safe space for your dog during travel or at home. Choose the right size for your dog's breed.",
+            "dog toys for teething puppies": "Teething puppies benefit from soft rubber toys and frozen toys that soothe their gums while providing relief.",
+            "best dog treats": "Look for high-quality dog treats that are low in calories and made with natural ingredients. Treats can be used for training and rewards.",
+            "dog safety products": "Dog safety products include seat belts, harnesses, and reflective gear for safe travel and visibility during walks.",
+            "dog health products": "Consider health products like joint supplements, dental chews, and probiotics to support your dog's overall well-being.",
+            "dog enrichment products": "Enrichment products, such as snuffle mats and interactive feeders, can help keep your dog mentally stimulated and engaged.",
+            "toys for small dogs": "Small dogs enjoy toys that are appropriately sized for their mouths, such as small plush toys, balls, and chew toys.",
+            "toys for large dogs": "Large dogs need durable toys that can withstand their strength. Look for large-sized chew toys and fetch toys.",
+            "how to choose dog toys": "When choosing dog toys, consider your dog's size, chewing habits, and play style. Always supervise playtime to ensure safety.",
+            "how to clean dog toys": "Regularly clean dog toys with warm, soapy water or in the dishwasher (if safe) to keep them hygienic and free from bacteria.",
+            "toxic foods for dogs": "Toxic foods include chocolate, onions, garlic, grapes, raisins, and xylitol. Always keep these foods out of reach.",
+            "dangerous plants for dogs": "Common plants that are toxic to dogs include lilies, azaleas, oleander, and sago palms. Research any plants before bringing them home.",
+            "household chemicals harmful to dogs": "Household chemicals like bleach, ammonia, and certain cleaning products can be harmful. Store them securely and use pet-safe alternatives.",
+            "medications toxic to dogs": "Many human medications, such as ibuprofen, acetaminophen, and certain antidepressants, can be toxic to dogs. Always consult your vet before giving any medication.",
+            "dangerous toys for dogs": "Avoid toys with small parts that can be swallowed, or toys made from toxic materials. Supervise playtime to ensure safety.",
+            "hazardous weather conditions for dogs": "Extreme heat and cold can be dangerous for dogs. Always provide shelter and monitor their exposure to harsh weather.",
+            "unsafe dog breeds for children": "Some dog breeds may not be suitable for families with young children due to their temperament. Always supervise interactions between dogs and kids.",
+            "dangerous situations for dogs": "Be cautious of leaving dogs unattended in cars, near open windows, or in crowded areas where they can become frightened.",
+            "common household hazards for dogs": "Common hazards include electrical cords, small objects that can be swallowed, and open trash cans. Keep your home dog-proofed.",
+            "signs of poisoning in dogs": "Signs of poisoning can include vomiting, diarrhea, lethargy, seizures, and difficulty breathing. If you suspect poisoning, contact your vet immediately.",
+            "how to dog-proof your home": "To dog-proof your home, secure hazardous items, remove toxic plants, and keep small objects out of reach. Create a safe space for your dog.",
+            "dangerous activities for dogs": "Avoid activities like allowing your dog to roam off-leash in unsafe areas, or engaging in rough play that could lead to injury.",
+            "how to handle a dog emergency": "In case of a dog emergency, stay calm, assess the situation, and contact your vet or an emergency animal clinic for guidance.",
+            "how to recognize heatstroke in dogs": "Signs of heatstroke include excessive panting, drooling, weakness, and confusion. Move your dog to a cooler area and contact your vet immediately.",
+            "how to prevent dog bites": "Prevent dog bites by socializing your dog, training them properly, and supervising interactions with strangers and other animals.",
+            "how to keep dogs safe during holidays": "During holidays, keep decorations, food, and plants that are toxic to dogs out of reach. Be cautious with guests and festivities.",
+            " grooming tips": "Brush your dog's coat regularly to prevent matting and reduce shedding. Use the right tools for their coat type."
+        };
+
+        function findKeywords() {
+            const userInput = document.getElementById("user-input").value.toLowerCase();
+            displayMessage(userInput, 'user');
+
+            // Clear input field
+            document.getElementById("user-input").value = "";
+            document.getElementById("suggestions").innerHTML = ""; // Clear suggestions
+
+            // Check for keywords
+            if (keywords[userInput]) {
+                displayMessage(keywords[userInput], 'bot');
+            } else {
+                displayMessage("No matching keywords found. Try 'breeds', 'food', 'training', or 'exercise'.", 'bot');
+            }
+        }
+
+        function showSuggestions() {
+            const userInput = document.getElementById("user-input").value.toLowerCase();
+            const suggestionsDiv = document.getElementById("suggestions");
+            suggestionsDiv.innerHTML = ""; // Clear previous suggestions
+
+            const matchedKeywords = Object.keys(keywords).filter(keyword => keyword.startsWith(userInput));
+            if (matchedKeywords.length > 0) {
+                matchedKeywords.forEach(keyword => {
+                    const suggestion = document.createElement("div");
+                    suggestion.className = "keyword";
+                    suggestion.textContent = keyword;
+
+                    suggestion.onclick = () => {
+                        document.getElementById("user-input").value = keyword; // Set input to the selected keyword
+                        findKeywords(); // Trigger the findKeywords function
+                    };
+
+                    suggestionsDiv.appendChild(suggestion);
+                });
+            }
+        }
+
+        function displayMessage(message, sender) {
+            const chatBox = document.getElementById("chat-box");
+            const messageDiv = document.createElement("div");
+            messageDiv.className = "message " + (sender === 'user' ? 'user-message' : 'bot-message');
+            messageDiv.innerHTML = message;
+            chatBox.appendChild(messageDiv);
+            chatBox.scrollTop = chatBox.scrollHeight; // Scroll to the bottom
+        }
+    </script>
+  </body>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+
+    <title>canine care</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="stylesheet" href="{% static 'index/css/animate.css' %}">
+
+    <link rel="stylesheet" href="{% static 'index/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/magnific-popup.css' %}">
+
+
+    <link rel="stylesheet" href="{% static 'index/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/jquery.timepicker.css' %}">
+
+    <link rel="stylesheet" href="{% static 'index/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/style.css' %}">
+</head>
+    <title>Dog Nutrition Recommendation Result</title>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	    	<a class="navbar-brand" href="{% url 'homepage' %}"><span class="flaticon-pawprint-1 mr-2"></span>CANINE CARE</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="fa fa-bars"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	        	<li class="nav-item "><a href="{% url 'homepage' %}" class="nav-link">Home</a></li>
+	        	<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	        	<li class="nav-item active"><a href="{% url 'initial_select' %}" class="nav-link">Breeds</a></li>
+
+	          <li class="nav-item"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
+	          <li class="nav-item"><a href="{% url 'chatbot' %}" class="nav-link">Ask</a></li>
+
+
+	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+<section class="ftco-section ftco-no-pt ftco-no-pb">
+    	<div class="container">
+    		<div class="row d-flex no-gutters">
+    			<div class="col-md-5 d-flex">
+                    <div>
+                        <img src="{{data.breed_image.url}}" width="450px" height="400px" class="mt-5">
+<!--    				<div class="img img-video d-flex align-self-stretch align-items-center justify-content-center justify-content-md-center mb-4 mb-sm-0" style="background-image:url({% static 'index/images/about-1.jpg' %});">-->
+    				</div>
+    			</div>
+    			<div class="col-md-7 pl-md-5 py-md-5">
+    				<div class="heading-section pt-md-5">
+	            <h2 class="mb-4">{{data.Breed_name}}</h2>
+    				</div>
+    				<div class="row">
+	    				<div class="col-md-12 services-2 w-100 d-flex">
+	    					<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-stethoscope"></span></div>
+	    					<div class="text pl-3">
+	    						<h4>Recommended Nutrition</h4>
+	    						<p>{{ nutrition }}</p>
+
+
+								 <p style="text-align: center;">
+								<a href="{% url 'chatbot' %}" class="btn btn-primary mr-md-4 py-3 px-4">
+								CLICK YOUR QUERY<span class="ion-ios-arrow-forward"></span>
+								</a>
+							  </p>
+
+	    					</div>
+	    				</div>
+	    			</div>
+
+
+	        </div>
+        </div>
+
+
+
+            <br><br>
+    	</div>
+    </section>
+    <a href="{% url 'get_nutri' b_id=data.id %}">Back to Form</a>
+   <footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+						<h2 class="footer-heading">Canine Care</h2>
+						<p>Because every tail wag deserves the best care.....</p>
+						<ul class="ftco-footer-social p-0">
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+            </ul>
+					</div>
+
+					<div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+						<h2 class="footer-heading">Quick Links</h2>
+						<ul class="list-unstyled">
+              <li><a href="{% url 'homepage' %}" class="py-2 d-block">Home</a></li>
+              <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+              <li><a href="{% url 'initial_select' %}" class="py-2 d-block">Breeds</a></li>
+              <li><a href="{% url 'gallery' %}" class="py-2 d-block">Gallery</a></li>
+              <li><a href="{% url 'chatbot' %}" class="py-2 d-block">Ask</a></li>
+
+              <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
+            </ul>
+					</div>
+					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+						<h2 class="footer-heading">Have a Questions?</h2>
+						<div class="block-23 mb-3">
+              <ul>
+                <li><span class="icon fa fa-map"></span><span class="text">456 Imaginary Ave.Redwood City,San Francisco, California, USA</span></li>
+                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">canineinfo456@gmail.com</span></a></li>
+              </ul>
+            </div>
+					</div>
+				</div>
+				<div class="row mt-5">
+          <div class="col-md-12 text-center">
+
+
+        </div>
+			</div>
+		</footer>
+<script src="{% static 'index/js/jquery.min.js' %}"></script>
+  <script src="{% static 'index/js/jquery-migrate-3.0.1.min.js' %}"></script>
+  <script src="{% static 'index/js/popper.min.js' %}"></script>
+  <script src="{% static 'index/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'index/js/jquery.easing.1.3.js' %}"></script>
+  <script src="{% static 'index/js/jquery.waypoints.min.js' %}"></script>
+  <script src="{% static 'index/js/jquery.stellar.min.js' %}"></script>
+  <script src="{% static 'index/js/jquery.animateNumber.min.js' %}"></script>
+  <script src="{% static 'index/js/bootstrap-datepicker.js' %}"></script>
+  <script src="{% static 'index/js/jquery.timepicker.min.js' %}"></script>
+  <script src="{% static 'index/js/owl.carousel.min.js' %}"></script>
+  <script src="{% static 'index/js/jquery.magnific-popup.min.js' %}"></script>
+  <script src="{% static 'index/js/scrollax.min.js' %}"></script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+  <script src="{% static 'index/js/google-map.js' %}"></script>
+  <script src="{% static 'index/js/main.js' %}"></script>
+</body>
+</html>

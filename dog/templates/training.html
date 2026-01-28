@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>canine care</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'index/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/magnific-popup.cs' %}">
+    <link rel="stylesheet" href="{% static 'index/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/style.css' %}">
+
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+      }
+      p {
+        color: black; /* Set paragraph text color to black */
+      }
+      h4, h5, h6 {
+        color: #000; /* Dark black for headings */
+      }
+      .step {
+        color: black; /* Set step text color to black */
+      }
+      .video-container {
+          position: relative;
+          width: 560px;
+          height: 315px;
+          background: black;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+      }
+
+      .play-button {
+          position: absolute;
+          width: 80px;
+          height: 80px;
+          background: rgba(255, 0, 0, 0.8);
+          border-radius: 50%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          transition: 0.3s;
+      }
+
+      .play-button:hover {
+          background: rgba(255, 0, 0, 1);
+      }
+
+      .play-button::before {
+          content: "▶";
+          font-size: 40px;
+          color: white;
+      }
+
+      iframe {
+          display: none;
+          width: 100%;
+          height: 100%;
+      }
+
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-center">
+            <p class="mb-0 phone pl-md-2">
+              <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +00 1234 567</a>
+              <a href="#"><span class="fa fa-paper-plane mr-1"></span> youremail@email.com</a>
+            </p>
+          </div>
+          <div class="col-md-6 d-flex justify-content-md-end">
+            <div class="social-media">
+              <p class="mb-0 d-flex">
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	    	<a class="navbar-brand" href="{% url 'homepage' %}"><span class="flaticon-pawprint-1 mr-2"></span>CANINE CARE</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="fa fa-bars"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	        	<li class="nav-item "><a href="{% url 'homepage' %}" class="nav-link">Home</a></li>
+	        	<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	        	<li class="nav-item"><a href="{% url 'initial_select' %}" class="nav-link">Breeds</a></li>
+
+	          <li class="nav-item"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
+	          <li class="nav-item"><a href="{% url 'chatbot' %}" class="nav-link">Ask</a></li>
+
+
+	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'index/images/try.avif' %}');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+          <div class="col-md-9 ftco-animate pb-5">
+            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html"></a></span> </p>
+            <h1 class="mb-0 bread"> 🐶 Unlock Your Pup's Potential!</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 ftco-animate">
+
+            <h2 class="mb-3">TRAINING A DOG IS NOT DIFFICULT AS YOU THINK!</h2>
+             <p>
+              <img src="{% static 'index/images/c1.jpeg' %}" alt="" class="img-fluid">
+            </p>
+            <p>Training a dog is a fundamental aspect of responsible pet ownership, ensuring that dogs are well-behaved, socialized, and able to respond to commands. The training process can vary significantly based on the dog's purpose, temperament, and breed. Here, we will explore three distinct types of dog training: training for normal companion dogs, specialized training for hunting dogs, and training for aggressive dogs.</p>
+            <p>Training normal dogs, or companion dogs, focuses on basic obedience and socialization skills. This includes teaching essential commands such as "sit," "stay," "come," and "heel." Positive reinforcement techniques, such as treats, praise, and play, are effective in encouraging desired behaviors. Socialization is also crucial; exposing dogs to various environments, people, and other animals helps them develop confidence and reduces anxiety. Regular training sessions, consistency, and patience are key to fostering a well-mannered pet that can thrive in a home environment.</p>
+            <p>Hunting dogs require specialized training to develop skills that assist their handlers in the field. This training often begins with basic obedience but quickly progresses to more advanced commands tailored to hunting tasks. For example, retrievers are taught to fetch and deliver game, while pointers learn to indicate the presence of birds. Training typically involves a combination of fieldwork, scent training, and exposure to various hunting scenarios. Handlers often use a mix of positive reinforcement and controlled exposure to real hunting situations to build the dog's confidence and competence in the field. Consistency and gradual progression are essential to ensure that hunting dogs can perform their tasks effectively and safely.</p>
+            <p>Training aggressive dogs requires a careful and structured approach, as these dogs may exhibit fear-based or territorial behaviors that can pose risks to themselves and others. The primary goal of training aggressive dogs is to modify their behavior through desensitization and counter-conditioning techniques. This involves identifying triggers that provoke aggressive responses and gradually exposing the dog to these triggers in a controlled manner while rewarding calm behavior. Professional guidance from a certified dog trainer or behaviorist is often recommended, as they can provide tailored strategies to address specific issues. Consistency, patience, and a focus on positive reinforcement are crucial in helping aggressive dogs learn to respond appropriately to various situations, ultimately leading to a safer and more harmonious environment for both the dog and its owner.</p>
+
+            <div class="video">
+              <iframe width="560" height="315" src="https://www.youtube.com/watch?v=1oDGa2yPb2g&list=PL1wCnaQRu4BG_RhOZaT4UNspBbRnf4IvJ&index=4" frameborder="0" allowfullscreen></iframe>
+            </div>
+
+            <h4>STEP TO STEP GUIDE TO TRAIN YOUR DOG</h4>
+
+              <p>
+              <img src="{% static 'index/images/c2.jpeg' %}" alt="" class="img-fluid">
+            </p>
+            <h6>Step 1: Establish a Training Environment</h6>
+            <p>Choose a Quiet Space: Select a distraction-free area for training sessions, such as your living room or backyard. Gather Supplies: Have treats, a leash, a collar or harness, and toys ready for training.</p>
+            <h6>Step 2: Use Positive Reinforcement</h6>
+            <p>Reward Good Behavior: Use treats, praise, or toys to reward your dog immediately after they perform the desired behavior. This helps them associate the behavior with positive outcomes. Be Consistent: Use the same commands and rewards consistently to avoid confusing your dog.</p>
+            <h6>Step 3: Teach Basic Commands</h6>
+            <p>Teaching basic commands to your dog is an essential part of training that helps establish good behavior, enhances communication, and strengthens the bond between you and your canine companion. Basic commands not only make your dog more manageable but also ensure their safety in various situations.</p>
+            <h6>Step 4: Socialization</h6>
+            <p>Expose Your Dog to Different Environments: Take your dog to parks, pet stores, and around other dogs and people to help them become comfortable in various situations. Positive Experiences: Ensure these experiences are positive by rewarding your dog with treats and praise when they remain calm and friendly.</p>
+            <h6>Step 5: Practice Regularly</h6>
+            <p>Short Sessions: Keep training sessions short (5-10 minutes) to maintain your dog’s attention. Daily Practice: Aim for daily training sessions to reinforce learning and build a routine.</p>
+            <h6>Step 6: Address Behavioral Issues</h6>
+            <p>Redirect Negative Behavior: If your dog exhibits unwanted behavior (like jumping or barking), redirect them to a positive behavior and reward them for it. Be Patient: Training takes time, and every dog learns at their own pace. Avoid punishment, as it can lead to fear and anxiety.</p>
+            <h6>Step 7: Gradually Increase Difficulty</h6>
+            <p>Add Distractions: Once your dog masters commands, practice in environments with more distractions to reinforce their training. Vary Commands: Use different commands and tricks to keep training engaging and fun.</p>
+            <h6>Step 8: End on a Positive Note</h6>
+            <p>Finish with a Success: Always end training sessions with a command your dog knows well, followed by praise and a treat. This leaves them with a positive experience.</p>
+            <h6>Additional Tips</h6>
+            <p>Be Patient and Consistent: Training takes time, and consistency is key. Don’t rush the process. Use Clear Commands: Use simple, clear commands and avoid using multiple words for the same command. Stay Positive: Keep a positive attitude, and make training a fun experience for both you and your dog. Seek Professional Help if Needed: If you encounter persistent behavioral issues, consider consulting a professional dog trainer or behaviorist. By following these steps and tips, you can effectively train your normal dog, helping them become a well-behaved and happy companion.</p>
+
+            <h4>BASIC COMMANDS TO TRAIN DOGS</h4>
+              <p>
+              <img src="{% static 'index/images/play.jpg' %}" alt="" class="img-fluid">
+            </p>
+            <h6>1.SIT</h6>
+              <p>Sit is one of the most fundamental commands to teach your dog. To begin, hold a treat close to your dog’s nose and then move your hand upward, allowing their head to follow the treat. This motion will naturally cause their bottom to lower to the ground. As soon as they are in a sitting position, say “Sit” and reward them with the treat. Repeat this process several times, gradually increasing the time before giving the treat to reinforce the behavior. This command is essential for establishing control and can be used in various situations.</p>
+            <h6>2.STAY</h6>
+              <p> Stay is a command that teaches your dog to remain in a specific position until released. Start by asking your dog to sit. Once they are in position, open your palm in front of you and say “Stay.” Take a few steps back while maintaining eye contact. If your dog stays in place, return to them and reward them. If they move, gently guide them back to the original position and try again. Gradually increase the distance and duration of the stay, reinforcing the command with treats and praise. This command is particularly useful for keeping your dog safe in various situations.</p>
+              <h6>3.COME</h6>
+              <p> Come  is a crucial command for ensuring your dog returns to you when called. Begin by putting a leash on your dog and allowing them to wander a bit. Call their name followed by “Come” in a happy and inviting tone. If they don’t respond, gently pull on the leash to guide them back to you. When they arrive, reward them with treats and praise. Practice this command in different locations and gradually increase distractions to reinforce their recall skills. A reliable “Come” command can be a lifesaver in many situations.</p>
+              <h6>4.DOWN</h6>
+              <p>Down is a command that teaches your dog to lie down, which can help calm them in various situations. Start with your dog in a sitting position. Hold a treat in your hand and move it to the ground, encouraging your dog to follow it. As they lower their body to follow the treat, say “Down” and reward them when they lie down completely. Repeat this process until they can perform the command without the treat. This command is useful for managing excitement and ensuring your dog remains calm in different environments. </p>
+              <h6>5.LEAVE IT</h6>
+              <p> Leave it is an important command that helps prevent your dog from picking up unwanted items. To teach this command, place a treat in both hands. Show your dog one treat and say “Leave it.” If they try to get it, close your hand. Once they stop trying and back away, reward them with the treat from your other hand. This command can be practiced in various situations, helping your dog learn to ignore distractions and focus on you instead.</p>
+
+                           <div class="video-container" id="videoContainer">
+                  <div class="play-button" id="playButton"></div>
+                  <iframe id="videoFrame" src="https://www.youtube.com/embed/1oDGa2yPb2g?enablejsapi=1" frameborder="0" allowfullscreen></iframe>
+              </div>
+
+
+              <h6>6.HEEL</h6>
+              <p> Heel is a command that teaches your dog to walk closely beside you without pulling on the leash. To begin, start walking with your dog on a leash and use a treat to guide them into the correct position. As they walk beside you, say “Heel” and reward them for staying close. Gradually increase the duration and distance of your walks while maintaining the heel position, reinforcing the behavior with treats and praise. This command is essential for enjoyable walks and helps establish good leash manners.</p>
+              <h6>7.DROP IT</h6>
+              <p> Drop it is a useful command for teaching your dog to release items from their mouth. To train this command, offer your dog a toy or treat they enjoy. When they have it in their mouth, say “Drop it” and show them a more desirable treat. When they drop the item to get the new treat, reward them. Practice this command with various items to reinforce the behavior and ensure your dog understands that dropping something can lead to a reward.</p>
+              <h6>8.WAIT</h6>
+              <p>Wait is a command that helps your dog learn patience. Start by asking your dog to sit or stay. Open your palm in front of them and say “Wait.” Take a step back or move away, and if they remain in place, return to them and reward them. This command can be particularly useful before meals or when opening doors, teaching your dog to remain calm and patient in various situations. </p>
+              <h6>9.GO TO BED OR PLACE </h6>
+              <p> Go to bed or place  is a command that directs your dog to a specific spot, such as a dog bed. To teach this command, lead your dog to the designated area and say “Go to bed” or “Place.” When they lie down in that spot, reward them. This command is helpful when you want your dog to settle down in a specific area, creating a designated space for relaxation.</p>
+              <h6>10.SHAKE OR PAW</h6>
+              <p>Shake or paw  is a fun command that teaches your dog to offer their paw. Start by asking your dog to sit, then gently lift one of their front paws while saying “Shake” or “Paw.” Reward them when they lift their paw on their own. With practice, your dog will learn to offer their paw without assistance, making this command a delightful trick to show off. </p>
+
+             <p>
+              <img src="{% static 'index/images/teach.jpeg' %}" alt="" class="img-fluid">
+            </p>
+
+              <h6>11.QUIET</h6>
+              <p> Quiet  is the counterpart to the Speak command, helping you manage barking behavior. When your dog is barking, wait for a moment of silence. As soon as they stop barking, say “Quiet” and reward them for being silent. If they continue barking, wait until they stop before rewarding them. Consistently using this command will help your dog learn to control their barking.</p>
+              <h6>12.FIND IT</h6>
+              <p>Find it  is a command that engages your dog’s natural instincts to search and sniff. To teach this command, show your dog a treat and then hide it while they watch. Say “Find it” and encourage them to search for the treat. When they find it, reward them. Gradually increase the difficulty by hiding treats in more challenging locations, making this command a fun and stimulating game for your dog. </p>
+              <h6>13.ROLL OVER</h6>
+              <p>Roll over is a more advanced command that can be taught once your dog has mastered lying down. Begin with your dog in a lying down position and hold a treat near their nose, moving it towards their shoulder. As they turn to follow the treat, encourage them to roll over by saying “Roll over” and rewarding them when they complete the roll. With practice, your dog will learn to roll over on command. </p>
+              <h6>14.OFF</h6>
+              <p>Off is a command that helps manage jumping behavior. If your dog jumps on people or furniture, say “Off” firmly but calmly. When they get down, reward them. If they don’t respond, gently guide them down. Consistently using this command in situations where jumping occurs will help your dog learn appropriate behavior. </p>
+              <h6>15.NO</h6>
+              <p>No is an essential command for teaching your dog to understand that certain behaviors are undesirable. To train this command, wait for your dog to engage in an unwanted behavior, such as chewing on furniture or jumping on people. When this happens, say “No” in a firm but calm voice. It’s important to deliver the command at the moment the behavior occurs so that your dog can associate the word with the action. If your dog stops the behavior after hearing “No,” immediately reward them with praise or a treat to reinforce the idea that stopping the unwanted behavior is a positive action. </p>
+
+
+
+          </div>
+        </div>
+      </div>
+    </section> <!-- .section -->
+   <p style="text-align: center;">
+			<a href="{% url 'chatbot' %}" class="btn btn-primary mr-md-4 py-3 px-4">
+			CLICK YOUR QUERY<span class="ion-ios-arrow-forward"></span>
+			</a>
+		  </p>
+
+
+     <footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+						<h2 class="footer-heading">Canine Care</h2>
+						<p>Because every tail wag deserves the best care.....</p>
+						<ul class="ftco-footer-social p-0">
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+            </ul>
+					</div>
+
+					<div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+						<h2 class="footer-heading">Quick Links</h2>
+						<ul class="list-unstyled">
+              <li><a href="{% url 'homepage' %}" class="py-2 d-block">Home</a></li>
+              <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+              <li><a href="{% url 'initial_select' %}" class="py-2 d-block">Breeds</a></li>
+              <li><a href="{% url 'gallery' %}" class="py-2 d-block">Gallery</a></li>
+              <li><a href="{% url 'chatbot' %}" class="py-2 d-block">Ask</a></li>
+
+              <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
+            </ul>
+					</div>
+					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+						<h2 class="footer-heading">Have a Questions?</h2>
+						<div class="block-23 mb-3">
+              <ul>
+                <li><span class="icon fa fa-map"></span><span class="text">456 Imaginary Ave.Redwood City,San Francisco, California, USA</span></li>
+                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">canineinfo456@gmail.com</span></a></li>
+              </ul>
+            </div>
+					</div>
+				</div>
+				<div class="row mt-5">
+          <div class="col-md-12 text-center">
+
+
+        </div>
+			</div>
+		</footer>
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+      <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+      </svg>
+    </div>
+
+
+
+    <script>
+    document.getElementById("playButton").addEventListener("click", function() {
+        this.style.display = "none";
+        let iframe = document.getElementById("videoFrame");
+        iframe.style.display = "block";
+        iframe.src += "&autoplay=1"; // Auto-play video on click
+    });
+    </script>
+
+    <script src="{% static 'index/js/jquery.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'index/js/popper.min.js' %}"></script>
+    <script src="{% static 'index/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'index/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'index/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'index/js/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static 'index/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'index/js/scrollax.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'index/js/google-map.js' %}"></script>
+    <script src="{% static 'index/js/main.js' %}"></script>
+  </body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+{% extends 'index.html' %}
+{% block content %}
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="content-wrapper">
+    <div class="container-fluid">
+
+    <div class="row mt-3">
+      <div class="col-lg-12">
+         <div class="card">
+           <div class="card-body">
+           <div class="card-title">Add Breed Details</div>
+           <hr>
+            <form method="post" action="{% url 'update_breed' b_id=data.id %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+           <div class="form-group">
+            <label for="input-1"> Breed Name</label>
+            <input type="text" class="form-control" id="input-1" placeholder="Enter Your breed name" name="b_name" value="{{data.Breed_name}}">
+           </div>
+           <div class="form-group">
+            <label for="input-2">Category</label>
+            <select class="form-control form-control-rounded " name="alpha" required>
+                <option>{{data.Alpha_name}}</option>
+                <option>A</option>
+                <option>B</option>
+                <option>C</option>
+                <option>D</option>
+                <option>E</option>
+                <option>F</option>
+                <option>G</option>
+                <option>H</option>
+                <option>I</option>
+                <option>J</option>
+                <option>K</option>
+                <option>L</option>
+                <option>M</option>
+                <option>N</option>
+                <option>O</option>
+                <option>P</option>
+                <option>Q</option>
+                <option>R</option>
+                <option>S</option>
+                <option>T</option>
+                <option>U</option>
+                <option>V</option>
+                <option>W</option>
+                <option>X</option>
+                <option>Y</option>
+                <option>Z</option>
+
+
+            </select>
+           </div>
+           <div class="form-group">
+            <label for="input-3">Description</label>
+            <input type="text" class="form-control" id="input-3" placeholder="Enter description:" name="des" value="{{data.Description}}">
+           </div>
+           <div class="form-group">
+            <label for="input-4">  Health</label>
+            <input type="text" class="form-control" id="input-4" placeholder="write about health :" name="hel" value="{{data.Health}}">
+           </div>
+           <div class="form-group">
+            <label for="input-4">Training </label>
+            <input type="text" class="form-control" id="input-4" placeholder="training :" name="tr" value="{{data.Training}}">
+           </div>
+           <div class="form-group">
+            <label for="input-5"> Exercise </label>
+            <input type="text" class="form-control" id="input-5" placeholder="exercise:" name="ex" value="{{data.Exercise}}">
+           </div>
+                <div class="form-group">
+            <label for="input-5">Image</label>
+                    <img src="{{data.breed_image.url}}">
+            <input type="file" class="form-control" id="input-5" placeholder="Choose image" name="img" >
+           </div>
+
+           <div class="form-group py-2">
+             <div class="icheck-material-white">
+            <input type="checkbox" id="user-checkbox1" checked="">
+            <label for="user-checkbox1">I Agree Terms &amp; Conditions</label>
+            </div>
+           </div>
+           <div class="form-group">
+            <button type="submit" class="btn btn-light px-5"><i class="icon-lock"></i> Submit Details</button>
+          </div>
+          </form>
+         </div>
+         </div>
+      </div>
+
+
+    </div><!--End Row-->
+
+	<!--start overlay-->
+		  <div class="overlay toggle-menu"></div>
+		<!--end overlay-->
+
+    </div>
+    <!-- End container-fluid-->
+
+   </div>
+</body>
+</html>
+{% endblock %}

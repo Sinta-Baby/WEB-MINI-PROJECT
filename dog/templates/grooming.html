@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <title>canine care</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:200,300,400,500,600,700,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="{% static 'index/css/animate.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/owl.carousel.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/owl.theme.default.min.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/magnific-popup.cs' %}">
+    <link rel="stylesheet" href="{% static 'index/css/bootstrap-datepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/jquery.timepicker.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/flaticon.css' %}">
+    <link rel="stylesheet" href="{% static 'index/css/style.css' %}">
+
+    <style>
+      body {
+        font-family: 'Montserrat', sans-serif;
+      }
+      p {
+        color: black; /* Set paragraph text color to black */
+      }
+      h4, h5, h6 {
+        color: #000; /* Dark black for headings */
+      }
+      .step {
+        color: black; /* Set step text color to black */
+      }
+
+     .grooming-techniques {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 20px; /* Space between techniques */
+                }
+
+                .technique {
+                    margin-bottom: 30px; /* Space below each technique */
+                }
+
+                .image-container {
+                    display: inline-block; /* Allow images to be inline with text */
+                    vertical-align: middle; /* Align images vertically with text */
+                    margin-left: 10px; /* Space between text and image */
+                }
+
+                .image-container.left {
+                    float: left; /* Align left for left-aligned images */
+                }
+
+                .image-container.right {
+                    float: right; /* Align right for right-aligned images */
+                }
+
+                .circular-image {
+                    width: 300px; /* Set a fixed width */
+                    height: 300px; /* Set a fixed height */
+                    border-radius: 50%; /* Make the image circular */
+                    object-fit: cover; /* Ensure the image covers the area */
+                }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-6 d-flex align-items-center">
+            <p class="mb-0 phone pl-md-2">
+              <a href="#" class="mr-2"><span class="fa fa-phone mr-1"></span> +00 1234 567</a>
+              <a href="#"><span class="fa fa-paper-plane mr-1"></span> youremail@email.com</a>
+            </p>
+          </div>
+          <div class="col-md-6 d-flex justify-content-md-end">
+            <div class="social-media">
+              <p class="mb-0 d-flex">
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-facebook"><i class="sr-only">Facebook</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-twitter"><i class="sr-only">Twitter</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-instagram"><i class="sr-only">Instagram</i></span></a>
+                <a href="#" class="d-flex align-items-center justify-content-center"><span class="fa fa-dribbble"><i class="sr-only">Dribbble</i></span></a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+   <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
+	    <div class="container">
+	    	<a class="navbar-brand" href="{% url 'homepage' %}"><span class="flaticon-pawprint-1 mr-2"></span>CANINE CARE</a>
+	      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
+	        <span class="fa fa-bars"></span> Menu
+	      </button>
+	      <div class="collapse navbar-collapse" id="ftco-nav">
+	        <ul class="navbar-nav ml-auto">
+	        	<li class="nav-item "><a href="{% url 'homepage' %}" class="nav-link">Home</a></li>
+	        	<li class="nav-item"><a href="{% url 'about' %}" class="nav-link">About</a></li>
+	        	<li class="nav-item"><a href="{% url 'initial_select' %}" class="nav-link">Breeds</a></li>
+
+	          <li class="nav-item"><a href="{% url 'gallery' %}" class="nav-link">Gallery</a></li>
+	          <li class="nav-item"><a href="{% url 'chatbot' %}" class="nav-link">Ask</a></li>
+
+
+	          <li class="nav-item"><a href="{% url 'contact' %}" class="nav-link">Contact</a></li>
+	        </ul>
+	      </div>
+	    </div>
+	  </nav>
+    <!-- END nav -->
+    <section class="hero-wrap hero-wrap-2" style="background-image: url('{% static 'index/images/try.avif' %}');" data-stellar-background-ratio="0.5">
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row no-gutters slider-text align-items-end">
+          <div class="col-md-9 ftco-animate pb-5">
+            <p class="breadcrumbs mb-2"><span class="mr-2"><a href="index.html"></a></span> </p>
+            <h1 class="mb-0 bread">🐾 Paw-some Grooming Insights for Your Furry Friend 🐶✨"</h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ftco-section ftco-degree-bg">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-8 ftco-animate">
+           <p>Dog grooming is an essential aspect of pet care that involves maintaining a dog's hygiene and appearance through various practices such as bathing, brushing, nail trimming, and ear cleaning. Regular grooming not only keeps a dog's coat healthy and free from mats and tangles but also helps to prevent skin issues and detect potential health problems early on. It provides an opportunity for owners to bond with their pets, as many dogs enjoy the attention and care that comes with grooming. Additionally, grooming can enhance a dog's comfort, especially for breeds with long or thick fur, and contributes to their overall well-being. Whether performed at home or by a professional groomer, regular grooming is vital for a dog's health and happiness.</p>
+              <img src="{% static 'index/images/pa.jpeg' %}" alt="" class="img-fluid">
+            </p>
+            <h4>KEY COMPONENTS</h4>
+            <p> Key components of dog grooming include several essential practices that contribute to a dog's overall health and well-being. Bathing involves washing the animal with water and pet-specific shampoos to remove dirt, oils, and odors, ensuring that skin irritation is avoided. Brushing the coat regularly helps eliminate loose fur, dirt, and debris, while also preventing matting and tangles, particularly in long-haired breeds. Nail trimming is crucial for maintaining a safe nail length to prevent overgrowth, which can lead to discomfort or injury, thus enhancing the dog's comfort and mobility. Ear cleaning is important for preventing infections and wax buildup, especially in breeds with floppy ears that can trap moisture. Additionally, teeth brushing is vital for dental health, as it helps prevent plaque buildup and dental diseases; special dog toothpaste and brushes are available for this purpose. Some dogs may also require anal gland expression to prevent discomfort or infection, a task often performed by professional groomers or veterinarians. Finally, styling and trimming may be necessary for certain breeds to maintain specific cuts or styles that adhere to breed standards or enhance their appearance.</p>
+
+            <h4>BENEFITS OF GROOMING</h4>
+            <p>Health Maintenance: Regular grooming helps identify potential health issues early, such as skin infections, lumps, or parasites.</p>
+            <p>    Hygiene: Keeping the coat clean and free of debris helps prevent skin problems and odors.</p>
+             <p>    Comfort: Proper grooming can prevent matting and discomfort, especially in long-haired breeds.</p>
+             <p>    Bonding: Grooming can be a bonding experience between the pet and owner, fostering trust and affection.</p>
+
+                <h4>GROOMING TECHNIQUES</h4>
+
+                <div class="grooming-techniques">
+                    <div class="technique">
+                        <h5>1. Bathing Techniques</h5>
+                        <p>Preparation: Gather all necessary supplies (dog shampoo, towels, brushes, etc.) before starting. Use lukewarm water to ensure comfort.</p>
+                        <p>Shampoo Application: Apply a dog-specific shampoo, lathering it well while avoiding the eyes and ears. Rinse thoroughly to remove all soap.</p>
+                        <p>Conditioning: For dogs with long or thick coats, consider using a conditioner to help detangle and soften the fur.</p>
+                        <p>Drying: Use a towel to remove excess water, and if the dog tolerates it, a blow dryer on a low setting can help dry the coat. Always keep the dryer at a safe distance to avoid burns.</p>
+                        <div class="image-container right">
+                            <img src="{% static 'index/images/bath.jpeg' %}" alt="Bathing Technique" class="circular-image">
+                        </div>
+                    </div>
+
+                    <div class="technique">
+                        <h5>2. Brushing Techniques</h5>
+                        <p>Choose the Right Brush: Select a brush based on the dog's coat type (slicker brushes for long-haired dogs, bristle brushes for short-haired dogs, etc.).</p>
+                        <p>Frequency: Brush regularly to prevent matting and reduce shedding. Long-haired breeds may require daily brushing, while short-haired breeds may need it weekly.</p>
+                        <p>Technique: Start from the head and work your way to the tail, brushing in the direction of hair growth. For matted areas, gently work through the tangles with your fingers or a dematting tool before brushing.</p>
+                        <div class="image-container left">
+                            <img src="{% static 'index/images/brush.jpeg' %}" alt="Brushing Technique" class="circular-image">
+                        </div>
+                    </div>
+
+                    <div class="technique">
+                        <h5>3. Nail Trimming Techniques</h5>
+                        <p>Tools: Use dog nail clippers or a nail grinder designed for pets.</p>
+                        <p>Positioning: Hold the paw firmly but gently, and press the pad to extend the nail.</p>
+                        <p>Cutting: Trim just the tip of the nail, avoiding the quick (the pink area inside the nail that contains blood vessels). If the dog has dark nails, trim small amounts at a time to avoid cutting into the quick.</p>
+                        <p>Reward: Always reward the dog with treats and praise to create a positive association with nail trimming.</p>
+                        <div class="image-container right">
+                            <img src="{% static 'index/images/nail.jpeg' %}" alt="Nail Trimming Technique" class="circular-image">
+                        </div>
+                    </div>
+
+                    <div class="technique">
+                        <h5>4. Ear Cleaning Techniques</h5>
+                        <p>Inspection: Regularly check the ears for dirt, wax buildup, or signs of infection (redness, odor).</p>
+                        <p>Cleaning Solution: Use a vet-recommended ear cleaner. Apply a few drops into the ear canal and gently massage the base of the ear.</p>
+                        <p>Wipe: Use a cotton ball or soft cloth to wipe away debris from the outer ear. Avoid inserting anything deep into the ear canal.</p>
+                        <div class="image-container left">
+                            <img src="{% static 'index/images/ear.jpeg' %}" alt="Ear Cleaning Technique" class="circular-image">
+                        </div>
+                    </div>
+
+                    <div class="technique">
+                        <h5>5. Teeth Brushing Techniques</h5>
+                        <p>Tools: Use a toothbrush designed for dogs and toothpaste formulated for pets (never use human toothpaste).</p>
+                        <p>Frequency: Aim to brush your dog's teeth several times a week, if not daily.</p>
+                        <p>Technique: Lift the dog's lip and gently brush in a circular motion, focusing on the gum line. Start slowly to help the dog get used to the process.</p>
+                        <div class="image-container right">
+                            <img src="{% static 'index/images/teeth.jpeg' %}" alt="Teeth Brushing Technique" class="circular-image">
+                        </div>
+                    </div>
+
+                    <div class="technique">
+                        <h5>6. Anal Gland Expression Techniques</h5>
+                        <p>When to Express: Some dogs may need their anal glands expressed if they show signs of discomfort or if they have a history of issues.</p>
+                        <p>Method: This can be done externally by applying gentle pressure around the glands (located at 4 o'clock and 8 o'clock positions) or internally by a veterinarian or professional groomer.</p>
+                        <p>Caution: If you're unsure, it's best to have a professional handle this to avoid injury or discomfort to the dog.</p>
+                        <div class="image-container left">
+                            <img src="{% static 'index/images/anal.jpeg' %}" alt="Anal Gland Expression Technique" class="circular-image">
+                        </div>
+                    </div>
+
+                    <div class="technique">
+                        <h5>7. Styling and Trimming Techniques</h5>
+                        <p>Tools: Use grooming scissors, clippers, and combs appropriate for the dog's coat type.</p>
+                        <p>Technique: For trimming, work in small sections, and always cut in the direction of hair growth. For clippers, use the appropriate blade size for the desired length.</p>
+                        <p>Safety: Be cautious around sensitive areas like the face, ears, and paws. If unsure, consult a professional groomer.</p>
+                        <div class="image-container right">
+                            <img src="{% static 'index/images/style.jpeg' %}" alt="Styling Technique" class="circular-image">
+                        </div>
+                    </div>
+                </div>
+            <h4>TOOLS AND EQUIPMENTS</h4>
+
+            <h6>Brushes and Combs:</h6>
+
+               <p>  Slicker Brush: Great for removing mats and tangles in long-haired breeds.</p>
+               <p>   Bristle Brush: Ideal for short-haired breeds to remove loose hair and distribute natural oils.</p>
+                <p>  Undercoat Rake: Useful for double-coated breeds to remove loose undercoat fur.</p>
+                 <p> Comb: A wide-toothed comb can help detangle fur, while a fine-toothed comb is good for finishing touches.</p>
+                <h6>  Clippers and Scissors:</h6>
+
+                <p>   Dog Clippers: Electric clippers are used for trimming and styling fur. Different blade sizes allow for various lengths.</p>
+                <p>   Grooming Scissors: Straight and curved scissors are used for precise trimming, especially around sensitive areas like the face and paws.</p>
+              <h6>    Nail Trimmers:</h6>
+
+               <p>    Guillotine Style: A common type of nail clipper that works well for most dogs.</p>
+                 <p>  Scissor Style: Suitable for larger breeds with thicker nails.</p>
+                <p>   Nail Grinder: An alternative to clipping, it smooths the nail edges and reduces the risk of cutting into the quick.</p>
+                <h6> Bathing Supplies:</h6>
+
+                 <p>  Dog Shampoo: Formulated specifically for dogs to avoid skin irritation. Options include hypoallergenic, medicated, and moisturizing shampoos.</p>
+                 <p>  Conditioner: Helps to detangle and soften the coat, especially for long-haired breeds.</p>
+                <p>   Towels and Dryers: Absorbent towels for drying and pet-safe blow dryers for faster drying.</p>
+                 <h6> Ear and Dental Care:</h6>
+
+                <p>  Ear Cleaner: A solution specifically designed for cleaning dog ears.</p>
+                <p>   Toothbrush and Toothpaste: Specially designed for dogs to maintain dental hygiene.</p>
+
+               <img src="{% static 'index/images/girl.jpeg' %}" alt="" class="img-fluid">
+
+
+            <h4> GROOMING SCHEDULES</h4>
+            <p>Daily: Long-haired breeds may require daily brushing to prevent matting.</p>
+              <p>    Weekly: Short-haired breeds typically need brushing once a week.</p>
+              <p>    Monthly: Bathing frequency can vary; some dogs may need a bath every month, while others may require more frequent baths depending on their activity level and coat type.</p>
+               <p>   Seasonal: Some breeds shed more during seasonal changes, requiring more frequent grooming during those times.</p>
+
+
+
+
+
+
+            <h4>COMMON GROOMING CHALLENGES</h4>
+            <h6>Matting:</h6>
+
+             <p>   Common in long-haired breeds, mats can be painful and difficult to remove. Regular brushing can help prevent this issue. </p>
+              <h6>  Fear or Anxiety:</h6>
+
+               <p>   Some dogs may be fearful of grooming tools or the grooming process itself. Gradual desensitization and positive reinforcement can help. </p>
+              <h6>  Skin Sensitivities:</h6>
+
+               <p>   Dogs with sensitive skin may require special shampoos and gentle grooming techniques. Always consult a veterinarian if you notice any skin issues. </p>
+              <h6>  Behavioral Issues:</h6>
+
+               <p>   Some dogs may resist grooming due to past negative experiences. Patience, positive reinforcement, and a calm environment can help ease their anxiety.</p>
+
+
+
+
+
+
+
+
+
+          </div>
+        </div>
+      </div>
+    </section> <!-- .section -->
+   <p style="text-align: center;">
+			<a href="{% url 'chatbot' %}" class="btn btn-primary mr-md-4 py-3 px-4">
+			CLICK YOUR QUERY<span class="ion-ios-arrow-forward"></span>
+			</a>
+		  </p>
+
+     <footer class="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+						<h2 class="footer-heading">Canine Care</h2>
+						<p>Because every tail wag deserves the best care.....</p>
+						<ul class="ftco-footer-social p-0">
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Twitter"><span class="fa fa-twitter"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Facebook"><span class="fa fa-facebook"></span></a></li>
+              <li class="ftco-animate"><a href="#" data-toggle="tooltip" data-placement="top" title="Instagram"><span class="fa fa-instagram"></span></a></li>
+            </ul>
+					</div>
+
+					<div class="col-md-6 col-lg-3 pl-lg-5 mb-4 mb-md-0">
+						<h2 class="footer-heading">Quick Links</h2>
+						<ul class="list-unstyled">
+              <li><a href="{% url 'homepage' %}" class="py-2 d-block">Home</a></li>
+              <li><a href="{% url 'about' %}" class="py-2 d-block">About</a></li>
+              <li><a href="{% url 'initial_select' %}" class="py-2 d-block">Breeds</a></li>
+              <li><a href="{% url 'gallery' %}" class="py-2 d-block">Gallery</a></li>
+              <li><a href="{% url 'chatbot' %}" class="py-2 d-block">Ask</a></li>
+
+              <li><a href="{% url 'contact' %}" class="py-2 d-block">Contact</a></li>
+            </ul>
+					</div>
+					<div class="col-md-6 col-lg-3 mb-4 mb-md-0">
+						<h2 class="footer-heading">Have a Questions?</h2>
+						<div class="block-23 mb-3">
+              <ul>
+                <li><span class="icon fa fa-map"></span><span class="text">456 Imaginary Ave.Redwood City,San Francisco, California, USA</span></li>
+                <li><a href="#"><span class="icon fa fa-phone"></span><span class="text">+2 392 3929 210</span></a></li>
+                <li><a href="#"><span class="icon fa fa-paper-plane"></span><span class="text">canineinfo456@gmail.com</span></a></li>
+              </ul>
+            </div>
+					</div>
+				</div>
+				<div class="row mt-5">
+          <div class="col-md-12 text-center">
+
+
+        </div>
+			</div>
+		</footer>
+
+    <!-- loader -->
+    <div id="ftco-loader" class="show fullscreen">
+      <svg class="circular" width="48px" height="48px">
+        <circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/>
+        <circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/>
+      </svg>
+    </div>
+
+    <script src="{% static 'index/js/jquery.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery-migrate-3.0.1.min.js' %}"></script>
+    <script src="{% static 'index/js/popper.min.js' %}"></script>
+    <script src="{% static 'index/js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.easing.1.3.js' %}"></script>
+    <script src="{% static 'index/js/jquery.waypoints.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.stellar.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.animateNumber.min.js' %}"></script>
+    <script src="{% static 'index/js/bootstrap-datepicker.js' %}"></script>
+    <script src="{% static 'index/js/jquery.timepicker.min.js' %}"></script>
+    <script src="{% static 'index/js/owl.carousel.min.js' %}"></script>
+    <script src="{% static 'index/js/jquery.magnific-popup.min.js' %}"></script>
+    <script src="{% static 'index/js/scrollax.min.js' %}"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBVWaKrjvy3MaE7SQ74_uJiULgl1JY0H2s&sensor=false"></script>
+    <script src="{% static 'index/js/google-map.js' %}"></script>
+    <script src="{% static 'index/js/main.js' %}"></script>
+  </body>
+</html>
