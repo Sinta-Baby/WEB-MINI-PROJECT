@@ -33,6 +33,7 @@ isodate==0.7.2
 itsdangerous==2.2.0
 Jinja2==3.1.5
 jiter==0.8.2
+joblib==1.5.3
 kiwisolver==1.4.9
 leather==0.4.1
 MarkupSafe==3.0.2
