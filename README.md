@@ -78,3 +78,19 @@ Due to large file size, trained ML models are stored using **Git LFS**:
 git clone https://github.com/Sinta-Baby/WEB-MINI-PROJECT.git
 cd WEB-MINI-PROJECT
 
+###2️⃣ Create and activate a virtual environment
+python -m venv venv
+source venv/Scripts/activate   # For Windows (Git Bash)
+
+###3️⃣ Install the required dependencies:
+pip install -r requirements.txt
+
+###4️⃣ Apply database migrations:
+python manage.py runserver
+
+###5️⃣ Run the Django development server:
+http://127.0.0.1:8000/
+
+To stop the server, press Ctrl + C in the terminal.
+
+
